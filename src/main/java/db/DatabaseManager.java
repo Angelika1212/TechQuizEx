@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.User;
 
 public class DatabaseManager {
     private static final String URL = "jdbc:postgresql://localhost:5432/quizex";
@@ -26,13 +27,13 @@ public class DatabaseManager {
         }
     }
 
-    public boolean addUser(String login, String password) {
+    public boolean addUser(User user) {
         String insertQuery = "INSERT INTO user (login, password) VALUES (?, ?)";
         
         try {
             PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
-            insertStmt.setString(1, login);
-            insertStmt.setString(2, password);
+            insertStmt.setString(1, user.getLogin());
+            insertStmt.setString(2, user.getPassword());
             insertStmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -41,13 +42,13 @@ public class DatabaseManager {
         }
     }
 
-    public boolean authenticate(String login, String password) {
+    public boolean authenticate(User user) {
         String query = "SELECT * FROM user WHERE login = ? AND password = ?";
         
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setString(1, login);
-            stmt.setString(2, password);
+            stmt.setString(1, user.getLogin());
+            stmt.setString(2, user.getPassword());
             ResultSet rs = stmt.executeQuery();
             return rs.next();
         } catch (SQLException e) {

@@ -3,6 +3,7 @@ package ui;
 import db.DatabaseManager;
 import javax.swing.*;
 import java.awt.*;
+import model.User;
 import ui_components.RoundJButton;
 import ui_components.RoundJPasswordField;
 import ui_components.RoundJTextField;
@@ -17,6 +18,7 @@ public class LoginJFrame extends JFrame {
     public LoginJFrame() {
         setTitle("Авторизация");
         setSize(350, 250);
+        //TODO -> По заданию надо, чтобы была отдельная кнопка для выхода, а не встроенная
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -35,8 +37,9 @@ public class LoginJFrame extends JFrame {
         loginButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
+            User user = new User(username, password);
 
-            if (dbManager.authenticate(username, password)) {
+            if (dbManager.authenticate(user)) {
                 messageLabel.setText("✅ Вход успешен!");
                 messageLabel.setForeground(new Color(0, 128, 0));
                 //openMainMenu();
