@@ -4,11 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundJPasswordField extends JPasswordField {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int radius;
+    //private static final long serialVersionUID = 1L;
+    private int radius;
 
     public RoundJPasswordField(int radius) {
         super();

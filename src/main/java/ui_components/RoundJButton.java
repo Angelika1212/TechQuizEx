@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundJButton extends JButton {
-    private static final long serialVersionUID = 2473536501600511565L;
+    //private static final long serialVersionUID = 2473536501600511565L;
     private int radius = 15;
     
     public RoundJButton(String text) {

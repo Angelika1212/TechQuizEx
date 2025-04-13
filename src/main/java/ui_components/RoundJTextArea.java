@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundJTextArea extends JTextArea {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     private final int radius;
 
     public RoundJTextArea(String text, int radius) {

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class RoundJFrame extends JFrame {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     private final int radius;
     private final RoundJButton closeButton;
     private final RoundJButton minimizeButton;

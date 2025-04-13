@@ -7,7 +7,7 @@ import ui_components.RoundJPasswordField;
 import ui_components.RoundJTextField;
 
 public class LoginJFrame extends JFrame {
-    private static final long serialVersionUID = -7015103178509207554L;
+    //private static final long serialVersionUID = -7015103178509207554L;
     private final RoundJTextField usernameField;
     private final RoundJPasswordField passwordField;
     private final JLabel messageLabel;

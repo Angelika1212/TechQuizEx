@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundJTextField extends JTextField {
-    private static final long serialVersionUID = 6943037073177362285L;
+    //private static final long serialVersionUID = 6943037073177362285L;
     private final int radius;
 
     public RoundJTextField(int radius) {
