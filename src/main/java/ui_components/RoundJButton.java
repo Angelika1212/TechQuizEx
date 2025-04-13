@@ -6,7 +6,9 @@ import java.awt.*;
 public class RoundJButton extends JButton {
     //private static final long serialVersionUID = 2473536501600511565L;
     private int radius = 15;
-    
+
+    public RoundJButton() {}
+
     public RoundJButton(String text) {
         super(text);
         setOpaque(false);
@@ -14,8 +16,13 @@ public class RoundJButton extends JButton {
         setFocusPainted(false);
         setBorderPainted(false);
     }
+    
+    @Override
+    public void setText(String text){
+        super.setText(text);
+    }
 
-	@Override
+    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setColor(new Color(0, 122, 255));

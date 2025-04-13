@@ -7,6 +7,10 @@ public class RoundJPanel extends JPanel {
     //private static final long serialVersionUID = 1L;
     private final int radius;
 
+    public RoundJPanel() {
+        this.radius = 15;
+    }
+    
     public RoundJPanel(int radius) {
         this.radius = radius;
         setOpaque(false);
