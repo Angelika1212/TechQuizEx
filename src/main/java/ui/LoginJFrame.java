@@ -42,7 +42,7 @@ public class LoginJFrame extends JFrame {
             if (dbManager.authenticate(user)) {
                 messageLabel.setText("✅ Вход успешен!");
                 messageLabel.setForeground(new Color(0, 128, 0));
-                //openMainMenu();
+                openMainMenu();
             } else {
                 messageLabel.setText("❌ Неверные данные!");
                 messageLabel.setForeground(Color.RED);
@@ -83,12 +83,12 @@ public class LoginJFrame extends JFrame {
         setLocationRelativeTo(null); // Центрируем окно
         setVisible(true);
     }
-    /*private void openMainMenu() {
+    private void openMainMenu() {
         JOptionPane.showMessageDialog(this, "Добро пожаловать!");
 
-        MainMenu mainMenu = new MainMenu();
+        MainMenuJFrame mainMenu = new MainMenuJFrame();
         mainMenu.setVisible(true);
         dispose();
-    }*/
+    }
 
 }
