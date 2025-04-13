@@ -4,22 +4,19 @@ import db.DatabaseManager;
 import javax.swing.*;
 import java.awt.*;
 import model.User;
-import ui_components.RoundJButton;
-import ui_components.RoundJPasswordField;
-import ui_components.RoundJTextField;
+import ui_components.*;
 
-public class LoginJFrame extends JFrame {
-    //private static final long serialVersionUID = -7015103178509207554L;
+public class RegisterJFrame extends JFrame {
+    private static final long serialVersionUID = -5431221371915202006L;
     private final RoundJTextField usernameField;
     private final RoundJPasswordField passwordField;
     private final JLabel messageLabel;
     private DatabaseManager dbManager = new DatabaseManager();
 
-    public LoginJFrame() {
-        setTitle("Авторизация");
-        setSize(350, 250);
-        //TODO -> По заданию надо, чтобы была отдельная кнопка для выхода, а не встроенная
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public RegisterJFrame(JFrame loginScreen) {
+        setTitle("Регистрация");
+        setSize(350, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -27,31 +24,32 @@ public class LoginJFrame extends JFrame {
 
         usernameField = new RoundJTextField(15);
         passwordField = new RoundJPasswordField(15);
-        RoundJButton loginButton = new RoundJButton("Войти");
-        RoundJButton registerButton = new RoundJButton("Регистрация");
+        RoundJButton registerButton = new RoundJButton("Зарегистрироваться");
+        RoundJButton backButton = new RoundJButton("Назад");
         messageLabel = new JLabel("", SwingConstants.CENTER);
 
         messageLabel.setFont(new Font("Arial", Font.ITALIC, 12));
         messageLabel.setForeground(Color.RED);
 
-        loginButton.addActionListener(e -> {
+        registerButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
             User user = new User(username, password);
 
-            if (dbManager.authenticate(user)) {
-                messageLabel.setText("✅ Вход успешен!");
+            if (dbManager.addUser(user)) {
+                messageLabel.setText("✅ Регистрация успешна!");
                 messageLabel.setForeground(new Color(0, 128, 0));
-                //openMainMenu();
+                dispose();
+                loginScreen.setVisible(true);
             } else {
-                messageLabel.setText("❌ Неверные данные!");
+                messageLabel.setText("❌ Ошибка! Возможно,такой логин уже занят.");
                 messageLabel.setForeground(Color.RED);
             }
         });
 
-        registerButton.addActionListener(e -> {
-            new RegisterJFrame(this); // Передаем текущее окно в конструктор регистрации
-            setVisible(false); // Скрываем окно авторизации
+        backButton.addActionListener(e -> {
+            dispose();
+            loginScreen.setVisible(true);
         });
 
         gbc.gridx = 0;
@@ -70,25 +68,17 @@ public class LoginJFrame extends JFrame {
 
         gbc.gridy = 4;
         gbc.gridwidth = 1;
-        add(registerButton, gbc);
+        add(backButton, gbc);
 
         gbc.gridx = 1;
-        add(loginButton, gbc);
+        add(registerButton, gbc);
 
         gbc.gridy = 5;
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         add(messageLabel, gbc);
 
-        setLocationRelativeTo(null); // Центрируем окно
+        setLocationRelativeTo(null);
         setVisible(true);
     }
-    /*private void openMainMenu() {
-        JOptionPane.showMessageDialog(this, "Добро пожаловать!");
-
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setVisible(true);
-        dispose();
-    }*/
-
 }

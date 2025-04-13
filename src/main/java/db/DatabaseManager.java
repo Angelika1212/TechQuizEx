@@ -28,10 +28,9 @@ public class DatabaseManager {
     }
 
     public boolean addUser(User user) {
-        String insertQuery = "INSERT INTO user (login, password) VALUES (?, ?)";
+        String insertQuery = "INSERT INTO users (login, password) VALUES (?, ?)";
         
-        try {
-            PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
+        try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)){
             insertStmt.setString(1, user.getLogin());
             insertStmt.setString(2, user.getPassword());
             insertStmt.executeUpdate();
@@ -43,10 +42,9 @@ public class DatabaseManager {
     }
 
     public boolean authenticate(User user) {
-        String query = "SELECT * FROM user WHERE login = ? AND password = ?";
+        String query = "SELECT * FROM users WHERE login = ? AND password = ?";
         
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, user.getLogin());
             stmt.setString(2, user.getPassword());
             ResultSet rs = stmt.executeQuery();
