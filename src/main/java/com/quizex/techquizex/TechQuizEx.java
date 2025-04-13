@@ -4,9 +4,12 @@
 
 package com.quizex.techquizex;
 
+import javax.swing.SwingUtilities;
+import ui.LoginJFrame;
+
 public class TechQuizEx {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        SwingUtilities.invokeLater(LoginJFrame::new);
     }
 }
