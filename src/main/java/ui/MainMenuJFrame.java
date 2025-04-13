@@ -103,7 +103,9 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_achivementButtonActionPerformed
 
     private void levelMapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelMapButtonActionPerformed
-        // TODO add your handling code here:
+        SubjectSelectJForm subjectSelectJForm = new SubjectSelectJForm();
+        subjectSelectJForm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_levelMapButtonActionPerformed
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
