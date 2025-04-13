@@ -15,7 +15,7 @@ public class LoginJFrame extends JFrame {
     private DatabaseManager dbManager = new DatabaseManager();
 
     public LoginJFrame() {
-        setTitle("Войти");
+        setTitle("Авторизация");
         setSize(350, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
@@ -25,7 +25,7 @@ public class LoginJFrame extends JFrame {
 
         usernameField = new RoundJTextField(15);
         passwordField = new RoundJPasswordField(15);
-        RoundJButton loginButton = new RoundJButton("Авторизация");
+        RoundJButton loginButton = new RoundJButton("Войти");
         RoundJButton registerButton = new RoundJButton("Регистрация");
         messageLabel = new JLabel("", SwingConstants.CENTER);
 
