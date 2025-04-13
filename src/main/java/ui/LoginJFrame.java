@@ -1,5 +1,6 @@
 package ui;
 
+import db.DatabaseManager;
 import javax.swing.*;
 import java.awt.*;
 import ui_components.RoundJButton;
@@ -11,6 +12,7 @@ public class LoginJFrame extends JFrame {
     private final RoundJTextField usernameField;
     private final RoundJPasswordField passwordField;
     private final JLabel messageLabel;
+    private DatabaseManager dbManager = new DatabaseManager();
 
     public LoginJFrame() {
         setTitle("Войти");
@@ -34,14 +36,14 @@ public class LoginJFrame extends JFrame {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            /*if (DatabaseManager.authenticate(username, password)) {
+            if (dbManager.authenticate(username, password)) {
                 messageLabel.setText("✅ Вход успешен!");
                 messageLabel.setForeground(new Color(0, 128, 0));
-                openMainMenu();
+                //openMainMenu();
             } else {
                 messageLabel.setText("❌ Неверные данные!");
                 messageLabel.setForeground(Color.RED);
-            }*/
+            }
         });
 
         /*registerButton.addActionListener(e -> {

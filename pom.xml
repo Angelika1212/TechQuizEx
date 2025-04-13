@@ -11,6 +11,13 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.quizex.techquizex.TechQuizEx</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version> <!-- Или более новая версия -->
+        </dependency>
+    </dependencies>
     
     <build>
     <plugins>
