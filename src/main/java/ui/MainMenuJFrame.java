@@ -16,6 +16,7 @@ public class MainMenuJFrame extends javax.swing.JFrame {
         jPanel = new RoundJPanel();
         levelMapButton = new RoundJButton();
         achivementButton = new RoundJButton();
+        logOutButton = new RoundJButton();
         exitButton = new RoundJButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -37,6 +38,14 @@ public class MainMenuJFrame extends javax.swing.JFrame {
             }
         });
 
+        logOutButton.setText("Выйти из аккаунта");
+        logOutButton.setBorder(null);
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         exitButton.setText("Выход");
         exitButton.setBorder(null);
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,21 +61,24 @@ public class MainMenuJFrame extends javax.swing.JFrame {
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(levelMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(achivementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(29, 29, 29)
                 .addComponent(levelMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(achivementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,9 +106,14 @@ public class MainMenuJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_levelMapButtonActionPerformed
 
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        LoginJFrame loginJFrame = new LoginJFrame();
+        loginJFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logOutButtonActionPerformed
+
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);
-        //TODO: стоит запустить рандомный экзамен и не давать пользователю выйти
+        System.exit(0);//TODO: стоит запустить рандомный экзамен и не давать пользователю выйти
     }//GEN-LAST:event_exitButtonActionPerformed
 
 
@@ -105,5 +122,6 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JPanel jPanel;
     private javax.swing.JButton levelMapButton;
+    private javax.swing.JButton logOutButton;
     // End of variables declaration//GEN-END:variables
 }
