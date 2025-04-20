@@ -99,7 +99,9 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void achivementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_achivementButtonActionPerformed
-        // TODO add your handling code here:
+        AchievementsWindow achievementWindow = new AchievementsWindow();
+        achievementWindow.setVisible(true);
+        dispose();
     }//GEN-LAST:event_achivementButtonActionPerformed
 
     private void levelMapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelMapButtonActionPerformed
