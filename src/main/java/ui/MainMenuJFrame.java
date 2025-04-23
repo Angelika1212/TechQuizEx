@@ -105,7 +105,7 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_achivementButtonActionPerformed
 
     private void levelMapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelMapButtonActionPerformed
-        SubjectSelectJForm subjectSelectJForm = new SubjectSelectJForm();
+        SubjectSelectJFrame subjectSelectJForm = new SubjectSelectJFrame();
         subjectSelectJForm.setVisible(true);
         dispose();
     }//GEN-LAST:event_levelMapButtonActionPerformed
