@@ -128,7 +128,9 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        // TODO add your handling code here:
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame();
+        levelMapJFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
