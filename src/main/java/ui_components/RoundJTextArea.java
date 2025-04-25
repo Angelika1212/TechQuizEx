@@ -7,6 +7,10 @@ public class RoundJTextArea extends JTextArea {
     //private static final long serialVersionUID = 1L;
     private final int radius;
 
+    public RoundJTextArea() {
+        this.radius = 15;
+    }
+    
     public RoundJTextArea(String text, int radius) {
         super(text);
         this.radius = radius;
