@@ -7,12 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.IncorrectAnswers;
+import model.LevelDb;
+import model.Subject;
 import model.User;
+import model.Task;
 
 public class DatabaseManager {
-    private static final String URL = "jdbc:postgresql://localhost:5432/quizex";
+    private static final String URL = "jdbc:postgresql://localhost:5433/Tia";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "newStart1_myadmin";
+    private static final String PASSWORD = "1234";
     private Connection connection;
 
     public DatabaseManager() {
@@ -55,22 +59,76 @@ public class DatabaseManager {
         }
     }
 
-    /*public static Task getTaskWithAnswer(int taskId) {
-        String query = "SELECT description, correct_answer FROM task WHERE task_id = ?";
+    public Task getTaskWithCorrectAnswer(int taskId, int subject) {
+        String query = "SELECT description, correct_answer FROM task WHERE task_id = ? AND subject = ?";
 
-        try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, taskId);
+            stmt.setInt(2, subject);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 String description = rs.getString("description");
                 String correctAnswer = rs.getString("correct_answer");
-                return new Task(taskId, description, correctAnswer);
+                return new Task(Long.valueOf(taskId), subject, description, correctAnswer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-    }*/
+    }
+    
+    public IncorrectAnswers getUncorrectAnswerForTask(int taskId, int answer_id) {
+        String query = "SELECT answer_text FROM incorrect_answers WHERE task_id = ? AND answer_id = ?";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, taskId);
+            stmt.setInt(2, answer_id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String answer_text = rs.getString("answer_text");
+                return new IncorrectAnswers(answer_id, answer_text);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Subject getSubject(int subject) {
+        String query = "SELECT name, image FROM subject WHERE subject_id = ?";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, subject);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                return new Subject(subject, name, image);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+        public LevelDb getLevel(int level_id) {
+        String query = "SELECT name, description FROM level WHERE level_id = ?";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, level_id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                return new LevelDb(name, description);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

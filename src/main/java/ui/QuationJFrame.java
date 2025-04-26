@@ -1,4 +1,5 @@
 package ui;
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
@@ -10,6 +11,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+		DatabaseManager databasemanager = new DatabaseManager();
 
         jPanel11 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -39,7 +41,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout(0, 5));
 
-        questionLabel.setText("Вопрос №1");
+        questionLabel.setText(databasemanager.getLevel(1).getName());
         questionLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         questionLabel.setPreferredSize(new java.awt.Dimension(57, 20));
         jPanel1.add(questionLabel, java.awt.BorderLayout.PAGE_START);
@@ -61,19 +63,19 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 1));
 
-        var1Label.setText("Вариант №1 - 1 кг");
+        var1Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var1Label);
 
-        var2Label.setText("Вариант №2 - 0,8 кг");
+        var2Label.setText(databasemanager.getTaskWithCorrectAnswer(1,1).getCorrectAnswer());
         var2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var2Label);
 
-        var3Label.setText("Вариант №3 - 5 кг");
+        var3Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
         var3Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var3Label);
 
-        var4Label.setText("Вариант №4 - 2 кг");
+        var4Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
         var4Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var4Label);
 
@@ -86,7 +88,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText("Идут два верблюда, один красный, другой налево. \nСколько весит кирпич, если ёжику 2 года?");
+        questionTextArea.setText(databasemanager.getTaskWithCorrectAnswer(1,1).getDescription());
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);

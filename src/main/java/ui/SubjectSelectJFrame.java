@@ -1,5 +1,6 @@
 package ui;
 
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJPanel;
 import javax.swing.ImageIcon;
@@ -12,6 +13,7 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+		DatabaseManager databasemanager = new DatabaseManager();
 
         jPanel1 = new javax.swing.JPanel();
         backButton = new RoundJButton();
@@ -56,12 +58,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.BorderLayout(0, 10));
 
         statisticLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mathStat.png"))); // NOI18N
+        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(1).getImage()))); // NOI18N
         statisticLabel.setLabelFor(statisticSubjectButton);
         statisticLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.add(statisticLabel, java.awt.BorderLayout.CENTER);
 
-        statisticSubjectButton.setText("Мат.стат.");
+        statisticSubjectButton.setText(databasemanager.getSubject(1).getName());
         statisticSubjectButton.setBorder(null);
         statisticSubjectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,12 +77,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel6.setLayout(new java.awt.BorderLayout(0, 10));
 
         linearAlgebraLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/linearAlg.png"))); // NOI18N
+        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(2).getImage()))); // NOI18N
         linearAlgebraLabel.setLabelFor(linearAlgebraButton);
         linearAlgebraLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.add(linearAlgebraLabel, java.awt.BorderLayout.CENTER);
 
-        linearAlgebraButton.setText("Линейная алгебра");
+        linearAlgebraButton.setText(databasemanager.getSubject(2).getName());
         linearAlgebraButton.setBorder(null);
         linearAlgebraButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,12 +96,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.BorderLayout(0, 10));
 
         programmingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/proga.png"))); // NOI18N
+        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(3).getImage()))); // NOI18N
         programmingLabel.setLabelFor(programmingButton);
         programmingLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.add(programmingLabel, java.awt.BorderLayout.CENTER);
 
-        programmingButton.setText("Си/C++");
+        programmingButton.setText(databasemanager.getSubject(3).getName());
         programmingButton.setBorder(null);
         programmingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
