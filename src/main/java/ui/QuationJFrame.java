@@ -32,6 +32,8 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(700, 410));
+        setPreferredSize(new java.awt.Dimension(700, 410));
 
         jPanel11.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
 
@@ -48,6 +50,11 @@ public class QuationJFrame extends javax.swing.JFrame {
         exitButton.setText("Закончить викторину");
         exitButton.setBorder(null);
         exitButton.setPreferredSize(new java.awt.Dimension(119, 40));
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
         jPanel3.add(exitButton, "card2");
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -100,6 +107,12 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        JokesJFrame jokesJFrame = new JokesJFrame();
+        jokesJFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;

@@ -25,6 +25,8 @@ public class MainMenuJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Основное меню");
+        setMinimumSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(300, 300));
 
         jPanel.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
 
