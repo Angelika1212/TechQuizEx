@@ -11,10 +11,6 @@ public class QuationJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel15 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         questionLabel = new javax.swing.JLabel();
@@ -25,75 +21,21 @@ public class QuationJFrame extends javax.swing.JFrame {
         var2Label = new javax.swing.JLabel();
         var3Label = new javax.swing.JLabel();
         var4Label = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         questionTextArea = new RoundJTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 20));
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
-        jPanel15.setPreferredSize(new java.awt.Dimension(20, 340));
+        jPanel11.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel15, java.awt.BorderLayout.LINE_START);
-
-        jPanel14.setPreferredSize(new java.awt.Dimension(20, 340));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel14, java.awt.BorderLayout.LINE_END);
-
-        jPanel13.setPreferredSize(new java.awt.Dimension(686, 30));
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel13, java.awt.BorderLayout.PAGE_END);
-
-        jPanel12.setPreferredSize(new java.awt.Dimension(686, 30));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel12, java.awt.BorderLayout.PAGE_START);
-
-        jPanel11.setLayout(new java.awt.GridLayout(1, 2));
-
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout(0, 5));
 
         questionLabel.setText("Вопрос №1");
         questionLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -110,7 +52,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 1));
+        jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 1));
 
         var1Label.setText("Вариант №1 - 1 кг");
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -132,6 +74,8 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel11.add(jPanel1);
 
+        jPanel5.setLayout(new java.awt.BorderLayout(0, 5));
+
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
@@ -140,23 +84,35 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
 
-        jPanel11.add(jScrollPane1);
+        jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setText("Задание:");
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel11.add(jPanel5);
 
         getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
+        getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(filler3, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(filler4, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel questionLabel;
     private javax.swing.JTextArea questionTextArea;
