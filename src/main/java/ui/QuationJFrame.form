@@ -51,7 +51,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="questionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x412;&#x43e;&#x43f;&#x440;&#x43e;&#x441; &#x2116;1"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="databasemanager.getLevel(level_num).getName()" type="code"/>
+                </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                     <BevelBorder/>
@@ -120,7 +122,9 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="var1Label">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x440;&#x438;&#x430;&#x43d;&#x442; &#x2116;1 - 1 &#x43a;&#x433;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText()" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                         <BevelBorder/>
@@ -130,7 +134,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="var2Label">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x440;&#x438;&#x430;&#x43d;&#x442; &#x2116;2 - 0,8 &#x43a;&#x433;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText()" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                         <BevelBorder/>
@@ -140,7 +146,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="var3Label">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x440;&#x438;&#x430;&#x43d;&#x442; &#x2116;3 - 5 &#x43a;&#x433;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText()" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                         <BevelBorder/>
@@ -150,7 +158,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="var4Label">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x440;&#x438;&#x430;&#x43d;&#x442; &#x2116;4 - 2 &#x43a;&#x433;"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText()" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                         <BevelBorder/>
@@ -185,7 +195,9 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="&#x418;&#x434;&#x443;&#x442; &#x434;&#x432;&#x430; &#x432;&#x435;&#x440;&#x431;&#x43b;&#x44e;&#x434;&#x430;, &#x43e;&#x434;&#x438;&#x43d; &#x43a;&#x440;&#x430;&#x441;&#x43d;&#x44b;&#x439;, &#x434;&#x440;&#x443;&#x433;&#x43e;&#x439; &#x43d;&#x430;&#x43b;&#x435;&#x432;&#x43e;. &#xa;&#x421;&#x43a;&#x43e;&#x43b;&#x44c;&#x43a;&#x43e; &#x432;&#x435;&#x441;&#x438;&#x442; &#x43a;&#x438;&#x440;&#x43f;&#x438;&#x447;, &#x435;&#x441;&#x43b;&#x438; &#x451;&#x436;&#x438;&#x43a;&#x443; 2 &#x433;&#x43e;&#x434;&#x430;?"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getDescription()" type="code"/>
+                    </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>

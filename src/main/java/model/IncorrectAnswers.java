@@ -25,11 +25,11 @@ public class IncorrectAnswers {
         this.answer_id = answer_id;
     }
 
-    public String getAnswer_text() {
+    public String getAnswerText() {
         return answer_text;
     }
 
-    public void setAnswer_text(String answer_text) {
+    public void setAnswerText(String answer_text) {
         this.answer_text = answer_text;
     }
     

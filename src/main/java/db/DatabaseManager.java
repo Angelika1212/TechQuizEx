@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.IncorrectAnswers;
@@ -60,7 +65,7 @@ public class DatabaseManager {
     }
 
     public Task getTaskWithCorrectAnswer(int taskId, int subject) {
-        String query = "SELECT description, correct_answer FROM task WHERE task_id = ? AND subject = ?";
+        String query = "SELECT description, correct_answer FROM task WHERE level_id = ? AND subject = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, taskId);
@@ -70,7 +75,7 @@ public class DatabaseManager {
             if (rs.next()) {
                 String description = rs.getString("description");
                 String correctAnswer = rs.getString("correct_answer");
-                return new Task(Long.valueOf(taskId), subject, description, correctAnswer);
+                return new Task(taskId, subject, description, correctAnswer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,21 +83,58 @@ public class DatabaseManager {
         return null;
     }
     
-    public IncorrectAnswers getUncorrectAnswerForTask(int taskId, int answer_id) {
-        String query = "SELECT answer_text FROM incorrect_answers WHERE task_id = ? AND answer_id = ?";
-
+    public IncorrectAnswers getUncorrectAnswerForTask(int taskId, int subject) {
+        Task task = getTaskWithCorrectAnswer(taskId, subject);
+        if(task ==  null) {  
+            System.out.println("Shit off! " + taskId + " " + subject);
+            return null;
+        }
+        String correctAnswer = task.getCorrectAnswer();
+        if(correctAnswer == null) {
+            System.out.println("Shit off instead of answer in!" + taskId);
+            return null;
+        }
+        
+        String query = "SELECT answer_text, answer_id FROM incorrect_answers WHERE task_id = ?";
+        HashMap<Integer,String> answers = new HashMap<>();
+        boolean c = false;
+        
         try(PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, taskId);
-            stmt.setInt(2, answer_id);
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                String answer_text = rs.getString("answer_text");
-                return new IncorrectAnswers(answer_id, answer_text);
+            while (rs.next()) {
+                String answerText = rs.getString("answer_text");
+                int answerId = rs.getInt("answer_id");
+                if(correctAnswer.equals(answerText)){
+                    if(c){
+                        continue;
+                    }
+                    c = true;
+                }
+                answers.put(answerId, answerText);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
+        
+        if(correctAnswer != null && !c){
+            int newId = answers.keySet().isEmpty() ? 1 : Collections.max(answers.keySet()) + 1;
+            answers.put(newId, correctAnswer);
+        }
+        
+        if(!answers.isEmpty()){ 
+            List<Integer> answersId = new ArrayList<>(answers.keySet());
+
+            Random random = new Random();
+            
+            int randomId = answersId.get(random.nextInt(answersId.size()));
+            String randomAnswerText = answers.get(randomId);
+            
+            return new IncorrectAnswers(randomId, randomAnswerText); 
+        }
+
         return null;
     }
     
@@ -114,7 +156,7 @@ public class DatabaseManager {
         return null;
     }
     
-        public LevelDb getLevel(int level_id) {
+    public LevelDb getLevel(int level_id) {
         String query = "SELECT name, description FROM level WHERE level_id = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)) {

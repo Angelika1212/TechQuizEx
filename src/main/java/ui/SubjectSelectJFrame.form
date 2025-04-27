@@ -93,8 +93,8 @@
             <Component class="javax.swing.JLabel" name="statisticLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/mathStat.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(1).getImage()))" type="code"/>
                 </Property>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="statisticSubjectButton"/>
@@ -114,7 +114,7 @@
             <Component class="javax.swing.JButton" name="statisticSubjectButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="databasemanager.getSubject(1).name" type="code"/>
+                  <Connection code="databasemanager.getSubject(1).getName()" type="code"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -143,8 +143,8 @@
             <Component class="javax.swing.JLabel" name="linearAlgebraLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/linearAlg.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(2).getImage()))" type="code"/>
                 </Property>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="linearAlgebraButton"/>
@@ -164,7 +164,7 @@
             <Component class="javax.swing.JButton" name="linearAlgebraButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;&#x41b;&#x438;&#x43d;&#x435;&#x439;&#x43d;&#x430;&#x44f; &#x430;&#x43b;&#x433;&#x435;&#x431;&#x440;&#x430;&quot;" type="code"/>
+                  <Connection code="databasemanager.getSubject(2).getName()" type="code"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -193,8 +193,8 @@
             <Component class="javax.swing.JLabel" name="programmingLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/proga.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(3).getImage()))" type="code"/>
                 </Property>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="programmingButton"/>
@@ -214,7 +214,7 @@
             <Component class="javax.swing.JButton" name="programmingButton">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="&quot;&#x421;&#x438;/C++&quot;" type="code"/>
+                  <Connection code="databasemanager.getSubject(3).getName()" type="code"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>

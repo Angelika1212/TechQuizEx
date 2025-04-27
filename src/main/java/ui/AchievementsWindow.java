@@ -1,5 +1,6 @@
 package ui;
 
+import db.DatabaseManager;
 import ui_components.AchievementPanel;
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,8 @@ import ui_components.*;
 
 public class AchievementsWindow extends JFrame {
 	
-    private JPanel achievementsPanel;
-	
+    private JPanel achievementsPanel;   
+    private DatabaseManager databasemanager;
     private static final String[] TEACHERS = {"Препод А", "Препод Б", "Препод В"};
 
     private static final String[][] ACHIEVEMENTS = {
@@ -50,7 +51,7 @@ public class AchievementsWindow extends JFrame {
         RoundJButton  backButton =  new  RoundJButton("Назад");
         backButton.setPreferredSize(new Dimension(100,30));
         backButton.addActionListener(e ->  { 
-            new MainMenuJFrame().setVisible(true);
+            new MainMenuJFrame(databasemanager).setVisible(true);
             dispose(); 
         });
         bottomPanel.add(backButton);

@@ -1,13 +1,24 @@
 package ui;
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 
 
 public class LevelMapJFrame extends javax.swing.JFrame {
-
-    public LevelMapJFrame() {
+    private int subject_num;
+    private DatabaseManager databasemanager;
+    public LevelMapJFrame(int subject_num, DatabaseManager databasemanager) {
+        this.subject_num = subject_num;
+        this.databasemanager = databasemanager;
         initComponents();
     }
 
+    private void levelFunc(int level_num, int subject_num){
+        QuationJFrame quationJFrame = new QuationJFrame(level_num, subject_num, databasemanager);
+        quationJFrame.setVisible(true);
+        dispose();
+           
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,49 +168,48 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void level1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame();
-        quationJFrame.setVisible(true);
-        dispose();
+        levelFunc(1,subject_num);
     }//GEN-LAST:event_level1ButtonActionPerformed
 
     private void level2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level2ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(2,subject_num);
     }//GEN-LAST:event_level2ButtonActionPerformed
 
     private void level3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level3ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(3,subject_num);
     }//GEN-LAST:event_level3ButtonActionPerformed
 
     private void level4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level4ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(4,subject_num);
     }//GEN-LAST:event_level4ButtonActionPerformed
 
     private void level5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level5ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(5,subject_num);
     }//GEN-LAST:event_level5ButtonActionPerformed
 
     private void level6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level6ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(6,subject_num);
     }//GEN-LAST:event_level6ButtonActionPerformed
 
     private void level7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level7ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(7,subject_num);
     }//GEN-LAST:event_level7ButtonActionPerformed
 
     private void level8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level8ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(8,subject_num);
     }//GEN-LAST:event_level8ButtonActionPerformed
 
     private void level9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level9ButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(9,subject_num);
+
     }//GEN-LAST:event_level9ButtonActionPerformed
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        // TODO add your handling code here:
+        levelFunc(10,subject_num);
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame();
+        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(databasemanager);
         subjectSelectJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

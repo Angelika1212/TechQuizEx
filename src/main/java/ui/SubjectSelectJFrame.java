@@ -3,17 +3,17 @@ package ui;
 import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJPanel;
-import javax.swing.ImageIcon;
 
 public class SubjectSelectJFrame extends javax.swing.JFrame {
-    public SubjectSelectJFrame() {
+    private DatabaseManager databasemanager;
+    public SubjectSelectJFrame(DatabaseManager databasemanager) {
+        this.databasemanager = databasemanager;
         initComponents();
     }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-		DatabaseManager databasemanager = new DatabaseManager();
 
         jPanel1 = new javax.swing.JPanel();
         backButton = new RoundJButton();
@@ -58,7 +58,7 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.BorderLayout(0, 10));
 
         statisticLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(1).getImage()))); // NOI18N
+        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(1).getImage())));
         statisticLabel.setLabelFor(statisticSubjectButton);
         statisticLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.add(statisticLabel, java.awt.BorderLayout.CENTER);
@@ -77,7 +77,7 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel6.setLayout(new java.awt.BorderLayout(0, 10));
 
         linearAlgebraLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(2).getImage()))); // NOI18N
+        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(2).getImage())));
         linearAlgebraLabel.setLabelFor(linearAlgebraButton);
         linearAlgebraLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.add(linearAlgebraLabel, java.awt.BorderLayout.CENTER);
@@ -96,7 +96,7 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.BorderLayout(0, 10));
 
         programmingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(3).getImage()))); // NOI18N
+        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(3).getImage())));
         programmingLabel.setLabelFor(programmingButton);
         programmingLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.add(programmingLabel, java.awt.BorderLayout.CENTER);
@@ -122,21 +122,25 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame();
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1,databasemanager);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
-        // TODO add your handling code here:
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2,databasemanager);
+        levelMapJFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_linearAlgebraButtonActionPerformed
 
     private void programmingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmingButtonActionPerformed
-        // TODO add your handling code here:
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3,databasemanager);
+        levelMapJFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_programmingButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainMenuJFrame mainMenu = new MainMenuJFrame();
+        MainMenuJFrame mainMenu = new MainMenuJFrame(databasemanager);
         mainMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

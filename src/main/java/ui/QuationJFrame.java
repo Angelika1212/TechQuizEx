@@ -4,14 +4,18 @@ import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
 public class QuationJFrame extends javax.swing.JFrame {
-    public QuationJFrame() {
+    private int level_num;
+    private int subject_num;
+    private DatabaseManager databasemanager;
+    public QuationJFrame(int level_num,int subject_num, DatabaseManager databasemanager) {
+        this.level_num = level_num;
+        this.subject_num =  subject_num;
+        this.databasemanager = databasemanager;
         initComponents();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-		DatabaseManager databasemanager = new DatabaseManager();
 
         jPanel11 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -41,7 +45,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout(0, 5));
 
-        questionLabel.setText(databasemanager.getLevel(1).getName());
+        questionLabel.setText(databasemanager.getLevel(level_num).getName());
         questionLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         questionLabel.setPreferredSize(new java.awt.Dimension(57, 20));
         jPanel1.add(questionLabel, java.awt.BorderLayout.PAGE_START);
@@ -63,19 +67,19 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 1));
 
-        var1Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
+        var1Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var1Label);
 
-        var2Label.setText(databasemanager.getTaskWithCorrectAnswer(1,1).getCorrectAnswer());
+        var2Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
         var2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var2Label);
 
-        var3Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
+        var3Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
         var3Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var3Label);
 
-        var4Label.setText(databasemanager.getUncorrectAnswerForTask(1,1).getAnswer_text());
+        var4Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
         var4Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var4Label);
 
@@ -88,7 +92,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText(databasemanager.getTaskWithCorrectAnswer(1,1).getDescription());
+        questionTextArea.setText(databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getDescription());
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
@@ -111,7 +115,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        JokesJFrame jokesJFrame = new JokesJFrame();
+        JokesJFrame jokesJFrame = new JokesJFrame(level_num,subject_num,databasemanager);
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

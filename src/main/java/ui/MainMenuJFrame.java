@@ -1,11 +1,14 @@
 package ui;
 
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJPanel;
 
 
 public class MainMenuJFrame extends javax.swing.JFrame {
-    public MainMenuJFrame() {
+    private DatabaseManager databasemanager;
+    public MainMenuJFrame(DatabaseManager databasemanager) {
+        this.databasemanager = databasemanager;
         initComponents();
     }
 
@@ -83,7 +86,7 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_achivementButtonActionPerformed
 
     private void levelMapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelMapButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJForm = new SubjectSelectJFrame();
+        SubjectSelectJFrame subjectSelectJForm = new SubjectSelectJFrame(databasemanager);
         subjectSelectJForm.setVisible(true);
         dispose();
     }//GEN-LAST:event_levelMapButtonActionPerformed

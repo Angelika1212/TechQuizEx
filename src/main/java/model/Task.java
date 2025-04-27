@@ -1,14 +1,14 @@
 package model;
 
 public class Task {
-    private Long task_id;
+    private int task_id;
     private int subject;
     private String description;
     private String correctAnswer;
     
     public Task() {}
 
-    public Task(Long task_id, int subject, String description, String correctAnswer) {
+    public Task(int task_id, int subject, String description, String correctAnswer) {
         this.task_id = task_id;
         this.subject = subject;
         this.description = description;
@@ -27,11 +27,11 @@ public class Task {
         return correctAnswer;
     }
 
-    public Long getTask_id() {
+    public int getTaskId() {
         return task_id;
     }
 
-    public void setTask_id(Long task_id) {
+    public void setTask_id(int task_id) {
         this.task_id = task_id;
     }
 
