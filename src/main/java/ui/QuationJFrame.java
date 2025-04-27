@@ -1,5 +1,10 @@
 package ui;
 import db.DatabaseManager;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.IncorrectAnswers;
+import model.Task;
 import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
@@ -12,7 +17,28 @@ public class QuationJFrame extends javax.swing.JFrame {
         this.subject_num =  subject_num;
         this.databasemanager = databasemanager;
         initComponents();
+	setupAnswers();
     }
+
+    private void setupAnswers() {
+        try {
+            Task task = databasemanager.getTaskWithCorrectAnswer(level_num, subject_num);
+            if (task == null) return;
+
+            List<IncorrectAnswers> answers = databasemanager.getUncorrectAnswerForTask(
+                task.getTaskId(), subject_num);
+
+            if (answers != null && answers.size() == 4) {
+                var1Label.setText(answers.get(0).getAnswerText());
+                var2Label.setText(answers.get(1).getAnswerText());
+                var3Label.setText(answers.get(2).getAnswerText());
+                var4Label.setText(answers.get(3).getAnswerText());
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,19 +93,19 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 1));
 
-        var1Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
+        var1Label.setText("");
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var1Label);
 
-        var2Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
+        var2Label.setText("");
         var2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var2Label);
 
-        var3Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
+        var3Label.setText("");
         var3Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var3Label);
 
-        var4Label.setText(databasemanager.getUncorrectAnswerForTask((int)databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getTaskId(),subject_num).getAnswerText());
+        var4Label.setText("");
         var4Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.add(var4Label);
 

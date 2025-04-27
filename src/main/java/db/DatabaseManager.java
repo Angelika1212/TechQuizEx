@@ -8,10 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import model.IncorrectAnswers;
 import model.LevelDb;
 import model.Subject;
@@ -83,59 +86,52 @@ public class DatabaseManager {
         return null;
     }
     
-    public IncorrectAnswers getUncorrectAnswerForTask(int taskId, int subject) {
+    public ArrayList<IncorrectAnswers> getUncorrectAnswerForTask(int taskId, int subject) {
         Task task = getTaskWithCorrectAnswer(taskId, subject);
-        if(task ==  null) {  
-            System.out.println("Shit off! " + taskId + " " + subject);
+        if (task == null || task.getCorrectAnswer() == null) {
             return null;
         }
         String correctAnswer = task.getCorrectAnswer();
-        if(correctAnswer == null) {
-            System.out.println("Shit off instead of answer in!" + taskId);
-            return null;
-        }
-        
-        String query = "SELECT answer_text, answer_id FROM incorrect_answers WHERE task_id = ?";
-        HashMap<Integer,String> answers = new HashMap<>();
-        boolean c = false;
-        
-        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+
+        ArrayList<IncorrectAnswers> allAnswers = new ArrayList<>();
+        Set<String> uniqueTexts = new HashSet<>(); // Для контроля уникальности
+
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT answer_text, answer_id FROM incorrect_answers WHERE task_id = ?")) {
             stmt.setInt(1, taskId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String answerText = rs.getString("answer_text");
-                int answerId = rs.getInt("answer_id");
-                if(correctAnswer.equals(answerText)){
-                    if(c){
-                        continue;
-                    }
-                    c = true;
+                String text = rs.getString("answer_text");
+                int id = rs.getInt("answer_id");
+
+                if (!text.equals(correctAnswer) && uniqueTexts.add(text)) {
+                    allAnswers.add(new IncorrectAnswers(id, text));
                 }
-                answers.put(answerId, answerText);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-        
-        if(correctAnswer != null && !c){
-            int newId = answers.keySet().isEmpty() ? 1 : Collections.max(answers.keySet()) + 1;
-            answers.put(newId, correctAnswer);
-        }
-        
-        if(!answers.isEmpty()){ 
-            List<Integer> answersId = new ArrayList<>(answers.keySet());
 
-            Random random = new Random();
-            
-            int randomId = answersId.get(random.nextInt(answersId.size()));
-            String randomAnswerText = answers.get(randomId);
-            
-            return new IncorrectAnswers(randomId, randomAnswerText); 
+        if (allAnswers.size() < 3) {
+            return null;
         }
 
-        return null;
+        Collections.shuffle(allAnswers);
+        ArrayList<IncorrectAnswers> result = new ArrayList<>(allAnswers.subList(0, 3));
+
+        result.add(new IncorrectAnswers(
+            allAnswers.isEmpty() ? 1 : Collections.max(
+                allAnswers.stream()
+                    .mapToInt(IncorrectAnswers::getAnswer_id)
+                    .boxed()
+                    .collect(Collectors.toList())
+            ) + 1,
+            correctAnswer
+        ));
+
+        Collections.shuffle(result);
+        return result;
     }
     
     public Subject getSubject(int subject) {
