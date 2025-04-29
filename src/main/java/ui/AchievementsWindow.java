@@ -4,6 +4,8 @@ import db.DatabaseManager;
 import ui_components.AchievementPanel;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import model.Achievement;
 import ui_components.*;
 
 //@author fedot
@@ -12,30 +14,23 @@ public class AchievementsWindow extends JFrame {
 	
     private JPanel achievementsPanel;   
     private DatabaseManager databasemanager;
-    private static final String[] TEACHERS = {"Препод А", "Препод Б", "Препод В"};
-
-    private static final String[][] ACHIEVEMENTS = {
-        {
-            "Достижение #1: Разрешение уравнений",
-            "Достижение #2: Вычисление интегралов",
-            "Достижение #3: Решение задач на геометрию",
-            "Достижение #4: Разрешение уравнений",
-            "Достижение #5: Вычисление интегралов",
-            "Достижение #6: Решение задач на геометрию"
-        },
-        {
-            "Достижение #1: Закон Ома",
-            "Достижение #2: Ньютонов закон",
-            "Достижение #3: Закон сохранения энергии"
-        },
-        {
-            "Достижение #1: Древний",
-            "Достижение #2: Пельмени",
-            "Достижение #3: Олени"
+    private int userId;
+    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Мирзеабасов О. А,"};
+    private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*15];
+    
+    private void setAchievementArr(){
+        ArrayList<Achievement> arr = databasemanager.getAchievements();
+        for(int j = 0; j < 3; j++){
+            for(int i = 0; i < 45; i++){
+                ACHIEVEMENTS[j][i] = arr.get(i).getName();
+            }
         }
-    };
-
-    public AchievementsWindow() {
+    }
+   
+    public AchievementsWindow(DatabaseManager databasemanager, int userId) {
+        this.databasemanager = databasemanager;
+        this.userId = userId;
+        setAchievementArr();
         setTitle("Достижения");
         setSize(800, 650);
         setLocationRelativeTo(null);
@@ -51,7 +46,7 @@ public class AchievementsWindow extends JFrame {
         RoundJButton  backButton =  new  RoundJButton("Назад");
         backButton.setPreferredSize(new Dimension(100,30));
         backButton.addActionListener(e ->  { 
-            new MainMenuJFrame(databasemanager).setVisible(true);
+            new MainMenuJFrame(databasemanager, userId).setVisible(true);
             dispose(); 
         });
         bottomPanel.add(backButton);
@@ -71,17 +66,17 @@ public class AchievementsWindow extends JFrame {
         achievementsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(new JScrollPane(achievementsPanel), BorderLayout.CENTER);
 
-        updateAchievements(0); // Загрузить достижения для первого преподавателя
+        updateAchievements(1); // Загрузить достижения для первого преподавателя
         setVisible(true);
     }
 
     private void updateAchievements(int teacherIndex) {
         JPanel panel = achievementsPanel;
         panel.removeAll();
-
+        
         String[] achievements = ACHIEVEMENTS[teacherIndex];
-        for (String achievement : achievements) {
-            AchievementPanel achievementPanel = new AchievementPanel(achievement, "Описание достижения '" + achievement + "'", true);
+        for (int i = 1; i < achievements.length; i++) {
+            AchievementPanel achievementPanel = new AchievementPanel(achievements[i], databasemanager.getAchievement(i).getDescription() + achievements[i], false);
             panel.add(achievementPanel);
         }
 

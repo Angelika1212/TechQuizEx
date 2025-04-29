@@ -5,10 +5,12 @@ import ui_components.RoundJButton;
 
 public class LevelMapJFrame extends javax.swing.JFrame {
     private int subject_num;
+    private int userId;
     private DatabaseManager databasemanager;
-    public LevelMapJFrame(int subject_num, DatabaseManager databasemanager) {
+    public LevelMapJFrame(int subject_num, DatabaseManager databasemanager, int userId) {
         this.subject_num = subject_num;
         this.databasemanager = databasemanager;
+        this.userId = userId;
         initComponents();
     }
 
@@ -209,7 +211,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(databasemanager);
+        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(databasemanager, userId);
         subjectSelectJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

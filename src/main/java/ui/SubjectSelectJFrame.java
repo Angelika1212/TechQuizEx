@@ -6,8 +6,10 @@ import ui_components.RoundJPanel;
 
 public class SubjectSelectJFrame extends javax.swing.JFrame {
     private DatabaseManager databasemanager;
-    public SubjectSelectJFrame(DatabaseManager databasemanager) {
+    private int userId;
+    public SubjectSelectJFrame(DatabaseManager databasemanager, int userId) {
         this.databasemanager = databasemanager;
+        this.userId = userId;
         initComponents();
     }
    
@@ -122,25 +124,25 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1,databasemanager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1,databasemanager,userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2,databasemanager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2,databasemanager,userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_linearAlgebraButtonActionPerformed
 
     private void programmingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmingButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3,databasemanager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3,databasemanager,userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_programmingButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainMenuJFrame mainMenu = new MainMenuJFrame(databasemanager);
+        MainMenuJFrame mainMenu = new MainMenuJFrame(databasemanager, userId);
         mainMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

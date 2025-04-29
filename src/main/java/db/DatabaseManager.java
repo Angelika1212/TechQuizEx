@@ -7,14 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import model.Achievement;
 import model.IncorrectAnswers;
 import model.LevelDb;
 import model.Subject;
@@ -51,6 +49,22 @@ public class DatabaseManager {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public int getUserId(User user){        
+        String query = "SELECT user_id FROM users WHERE login = ? AND password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, user.getLogin());
+            stmt.setString(2, user.getPassword());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int user_id = rs.getInt("user_id");
+                return user_id;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public boolean authenticate(User user) {
@@ -168,5 +182,60 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public Achievement getAchievement(int achievement_id) {
+        String query = "SELECT name, image, description FROM achievements  WHERE achievement_id = ?";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, achievement_id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                String description = rs.getString("description");
+                return new Achievement(achievement_id, image, name, description);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        
+    public ArrayList<Achievement> getAchievements() {
+        ArrayList<Achievement> achievements = new ArrayList<>();
+        String query = "SELECT achievement_id, name, image, description FROM achievements";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int achievement_id = rs.getInt("achievement_id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                String description = rs.getString("description");
+                achievements.add(new Achievement(achievement_id, image, name, description));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return achievements;
+    }
+    
+    public boolean IsAchievementCompleted(int achievement_id, int user_id) {
+        String query = "SELECT complete FROM achievements WHERE achievement_id = ? AND user_id = ?";
+
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                boolean complete = rs.getBoolean("complete");
+                return complete;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
