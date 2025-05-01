@@ -1,5 +1,6 @@
 package ui;
 import db.DatabaseManager;
+import java.awt.Color;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,6 @@ public class QuationJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(700, 410));
-        setPreferredSize(new java.awt.Dimension(700, 410));
 
         jPanel11.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
 
@@ -96,18 +96,43 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         var1Label.setText("");
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var1LabelMouseClicked(evt);
+            }
+        });
+        var1Label.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                var1LabelPropertyChange(evt);
+            }
+        });
         jPanel2.add(var1Label);
 
         var2Label.setText("");
         var2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var2LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var2Label);
 
         var3Label.setText("");
         var3Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var3LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var3Label);
 
         var4Label.setText("");
         var4Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var4LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var4Label);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -119,7 +144,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText(dbManager.getTaskWithCorrectAnswer(levelNumb,subjectNumb).getDescription());
+        questionTextArea.setText(dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb).getDescription());
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
@@ -146,6 +171,34 @@ public class QuationJFrame extends javax.swing.JFrame {
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var1LabelMouseClicked
+        String user_answer = this.var1Label.getText();
+        this.var1Label.setOpaque(true);
+        this.var1Label.setBackground(Color.green);
+    }//GEN-LAST:event_var1LabelMouseClicked
+
+    private void var2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
+        String user_answer = this.var2Label.getText();
+        this.var2Label.setOpaque(true);
+        this.var2Label.setBackground(Color.green);
+    }//GEN-LAST:event_var2LabelMouseClicked
+
+    private void var3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var3LabelMouseClicked
+        String user_answer = this.var3Label.getText();
+        this.var3Label.setOpaque(true);
+        this.var3Label.setBackground(Color.green);
+    }//GEN-LAST:event_var3LabelMouseClicked
+
+    private void var4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var4LabelMouseClicked
+        String user_answer = this.var4Label.getText();
+        this.var4Label.setOpaque(true);
+        this.var4Label.setBackground(Color.green);
+    }//GEN-LAST:event_var4LabelMouseClicked
+
+    private void var1LabelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_var1LabelPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_var1LabelPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
