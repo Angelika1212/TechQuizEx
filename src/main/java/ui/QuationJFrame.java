@@ -61,8 +61,12 @@ public class QuationJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 20));
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jPanel4 = new javax.swing.JPanel();
+        exitDevButton = new javax.swing.JButton();
+        nextQuestionDevButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        examDevButton = new javax.swing.JButton();
+        backDevButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -160,8 +164,59 @@ public class QuationJFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
         getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
         getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
-        getContentPane().add(filler3, java.awt.BorderLayout.PAGE_END);
-        getContentPane().add(filler4, java.awt.BorderLayout.PAGE_START);
+
+        jPanel4.setMaximumSize(new java.awt.Dimension(32767, 20));
+        jPanel4.setPreferredSize(new java.awt.Dimension(705, 20));
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        exitDevButton.setBackground(new java.awt.Color(242, 242, 242));
+        exitDevButton.setText("       ");
+        exitDevButton.setBorder(null);
+        exitDevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitDevButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(exitDevButton, java.awt.BorderLayout.WEST);
+
+        nextQuestionDevButton.setBackground(new java.awt.Color(242, 242, 242));
+        nextQuestionDevButton.setText("      ");
+        nextQuestionDevButton.setBorder(null);
+        nextQuestionDevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextQuestionDevButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(nextQuestionDevButton, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        jPanel6.setMaximumSize(new java.awt.Dimension(32767, 20));
+        jPanel6.setMinimumSize(new java.awt.Dimension(10, 20));
+        jPanel6.setPreferredSize(new java.awt.Dimension(705, 20));
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        examDevButton.setBackground(new java.awt.Color(242, 242, 242));
+        examDevButton.setText("      ");
+        examDevButton.setBorder(null);
+        examDevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                examDevButtonActionPerformed(evt);
+            }
+        });
+        jPanel6.add(examDevButton, java.awt.BorderLayout.EAST);
+
+        backDevButton.setBackground(new java.awt.Color(242, 242, 242));
+        backDevButton.setText("       ");
+        backDevButton.setBorder(null);
+        backDevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backDevButtonActionPerformed(evt);
+            }
+        });
+        jPanel6.add(backDevButton, java.awt.BorderLayout.WEST);
+
+        getContentPane().add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,19 +255,39 @@ public class QuationJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_var1LabelPropertyChange
 
+    private void exitDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDevButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitDevButtonActionPerformed
+
+    private void nextQuestionDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionDevButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextQuestionDevButtonActionPerformed
+
+    private void examDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examDevButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_examDevButtonActionPerformed
+
+    private void backDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backDevButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backDevButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backDevButton;
+    private javax.swing.JButton examDevButton;
     private javax.swing.JButton exitButton;
+    private javax.swing.JButton exitDevButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton nextQuestionDevButton;
     private javax.swing.JLabel questionLabel;
     private javax.swing.JTextArea questionTextArea;
     private javax.swing.JLabel var1Label;
