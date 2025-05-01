@@ -1,10 +1,9 @@
 package ui;
-import db.DatabaseManager;
 import ui_components.RoundJButton;
 
 
 public class LevelMapJFrame extends javax.swing.JFrame {
-    private int  subjectNumb;
+    private int subjectNumb;
     private int userId;
     
     public LevelMapJFrame(int subjectNumb, int userId) {
@@ -14,7 +13,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }
 
     private void loadLevel(int levelNumb, int  subjectNumb){
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
+        QuationJFrame quationJFrame = new QuationJFrame(subjectNumb, levelNumb);
         quationJFrame.setVisible(true);
         dispose();
     }

@@ -2,8 +2,8 @@ package ui;
 import ui_components.RoundJButton;
 
 public class JokesJFrame extends javax.swing.JFrame {
-    private int levelNumb;
     private int subjectNumb;
+    private int levelNumb;
 
     public JokesJFrame(int levelNumb, int subjectNumb) {
         this.levelNumb =  levelNumb;
@@ -101,7 +101,7 @@ public class JokesJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backToQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToQuizButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
+        QuationJFrame quationJFrame = new QuationJFrame(subjectNumb, levelNumb);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backToQuizButtonActionPerformed

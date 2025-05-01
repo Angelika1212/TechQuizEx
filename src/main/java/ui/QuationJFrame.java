@@ -1,31 +1,42 @@
 package ui;
 import db.DatabaseManager;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.IncorrectAnswers;
 import model.Task;
 import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
 public class QuationJFrame extends javax.swing.JFrame {
-    private int levelNumb;
+    private String userAnswer;
+    private int quastionNumb = 0;
+    private String correctAnswer;
+    
+    private int taskNumb;
     private int subjectNumb;
+    private int levelNumb;
     private final DatabaseManager dbManager = new DatabaseManager();
     
-    public QuationJFrame(int levelNumb, int subjectNumb) {
+    public QuationJFrame(int subjectNumb, int levelNumb) {
+        this.subjectNumb = subjectNumb;
         this.levelNumb = levelNumb;
-        this.subjectNumb =  subjectNumb;
         initComponents();
-	setupAnswers();
+	setupQuastion();
     }
 
-    private void setupAnswers() {
+    private void setupQuastion() {
         try {
-            Task task = dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb);
+            Task task = dbManager.getTasks(levelNumb, subjectNumb).get(quastionNumb);
             if (task == null) return;
+            correctAnswer = task.getCorrectAnswer();
+            questionTextArea.setText(task.getDescription());
+            jLabel1.setText("Задание #" + task.getTaskId());
 
-            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswerForTask(
+            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswersForTask(
                 task.getTaskId(), subjectNumb);
 
             if (answers != null && answers.size() == 4) {
@@ -34,11 +45,70 @@ public class QuationJFrame extends javax.swing.JFrame {
                 var3Label.setText(answers.get(2).getAnswerText());
                 var4Label.setText(answers.get(3).getAnswerText());
             }
+            
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
     }
 
+    private String chooseAnswer(javax.swing.JLabel varIlabel){
+        String choseAnswer;
+        ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
+        labels.add(this.var1Label);
+        labels.add(this.var2Label);
+        labels.add(this.var3Label);
+        labels.add(this.var4Label);
+        for(javax.swing.JLabel panel : labels){
+            if(panel != varIlabel){
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+        }
+        varIlabel.setOpaque(true);
+        varIlabel.setBackground(Color.lightGray);
+        choseAnswer = varIlabel.getText();
+        this.userAnswer = choseAnswer;
+        IsAnswerOfUserIsCorrect();
+        return choseAnswer;
+    }
+    
+    private void IsAnswerOfUserIsCorrect(){
+        ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
+        labels.add(this.var1Label);
+        labels.add(this.var2Label);
+        labels.add(this.var3Label);
+        labels.add(this.var4Label);
+        
+        for(javax.swing.JLabel panel : labels){
+            if(panel.getText().equals(correctAnswer)){
+                panel.setOpaque(true);
+                panel.setBackground(Color.green);
+            }
+            else{
+                panel.setOpaque(true);
+                panel.setBackground(Color.red);
+            }
+        }
+        
+        if(userAnswer.equals(correctAnswer)){ 
+            JOptionPane.showMessageDialog(this, "Молодец! Идём к следующей задаче!");
+            quastionNumb++; 
+            for(javax.swing.JLabel panel : labels){
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+            setupQuastion();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Попробуй ещё раз!");
+            for(javax.swing.JLabel panel : labels){
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+            setupQuastion();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,7 +135,6 @@ public class QuationJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(700, 410));
-        setPreferredSize(new java.awt.Dimension(700, 410));
 
         jPanel11.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
 
@@ -95,18 +164,38 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         var1Label.setText("");
         var1Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var1Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var1LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var1Label);
 
         var2Label.setText("");
         var2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var2Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var2LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var2Label);
 
         var3Label.setText("");
         var3Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var3Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var3LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var3Label);
 
         var4Label.setText("");
         var4Label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        var4Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                var4LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(var4Label);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -118,7 +207,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText(dbManager.getTaskWithCorrectAnswer(levelNumb,subjectNumb).getDescription());
+        questionTextArea.setText("");
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
@@ -145,6 +234,22 @@ public class QuationJFrame extends javax.swing.JFrame {
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var1LabelMouseClicked
+        chooseAnswer(var1Label);
+    }//GEN-LAST:event_var1LabelMouseClicked
+
+    private void var2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
+        chooseAnswer(var2Label);
+    }//GEN-LAST:event_var2LabelMouseClicked
+
+    private void var3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var3LabelMouseClicked
+        chooseAnswer(var3Label);
+    }//GEN-LAST:event_var3LabelMouseClicked
+
+    private void var4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var4LabelMouseClicked
+        chooseAnswer(var4Label);
+    }//GEN-LAST:event_var4LabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
