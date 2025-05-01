@@ -1,14 +1,12 @@
 package ui;
 
-import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJPanel;
 
 public class SubjectSelectJFrame extends javax.swing.JFrame {
-    private DatabaseManager databasemanager;
     private int userId;
-    public SubjectSelectJFrame(DatabaseManager databasemanager, int userId) {
-        this.databasemanager = databasemanager;
+    
+    public SubjectSelectJFrame(int userId) {
         this.userId = userId;
         initComponents();
     }
@@ -37,7 +35,6 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         setTitle("Выберите предмет");
         setLocationByPlatform(true);
         setMinimumSize(getPreferredSize());
-        setPreferredSize(new java.awt.Dimension(600, 315));
         getContentPane().setLayout(new java.awt.BorderLayout(0, 10));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(630, 30));
@@ -60,12 +57,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.BorderLayout(0, 10));
 
         statisticLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(1).getImage())));
+        statisticLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mathStat.png")));
         statisticLabel.setLabelFor(statisticSubjectButton);
         statisticLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel5.add(statisticLabel, java.awt.BorderLayout.CENTER);
 
-        statisticSubjectButton.setText(databasemanager.getSubject(1).getName());
+        statisticSubjectButton.setText("Математическая статистика");
         statisticSubjectButton.setBorder(null);
         statisticSubjectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,12 +76,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel6.setLayout(new java.awt.BorderLayout(0, 10));
 
         linearAlgebraLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(2).getImage())));
+        linearAlgebraLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/linearAlg.png")));
         linearAlgebraLabel.setLabelFor(linearAlgebraButton);
         linearAlgebraLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.add(linearAlgebraLabel, java.awt.BorderLayout.CENTER);
 
-        linearAlgebraButton.setText(databasemanager.getSubject(2).getName());
+        linearAlgebraButton.setText("Линейная алгебра");
         linearAlgebraButton.setBorder(null);
         linearAlgebraButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,12 +95,12 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.BorderLayout(0, 10));
 
         programmingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(databasemanager.getSubject(3).getImage())));
+        programmingLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/proga.png")));
         programmingLabel.setLabelFor(programmingButton);
         programmingLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.add(programmingLabel, java.awt.BorderLayout.CENTER);
 
-        programmingButton.setText(databasemanager.getSubject(3).getName());
+        programmingButton.setText("Программирование Си/С++");
         programmingButton.setBorder(null);
         programmingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,25 +121,25 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1,databasemanager,userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1, userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2,databasemanager,userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2, userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_linearAlgebraButtonActionPerformed
 
     private void programmingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmingButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3,databasemanager,userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3, userId);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_programmingButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainMenuJFrame mainMenu = new MainMenuJFrame(databasemanager, userId);
+        MainMenuJFrame mainMenu = new MainMenuJFrame(userId);
         mainMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

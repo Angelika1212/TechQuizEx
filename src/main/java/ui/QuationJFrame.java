@@ -9,24 +9,24 @@ import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
 public class QuationJFrame extends javax.swing.JFrame {
-    private int level_num;
-    private int subject_num;
-    private DatabaseManager databasemanager;
-    public QuationJFrame(int level_num,int subject_num, DatabaseManager databasemanager) {
-        this.level_num = level_num;
-        this.subject_num =  subject_num;
-        this.databasemanager = databasemanager;
+    private int levelNumb;
+    private int subjectNumb;
+    private final DatabaseManager dbManager = new DatabaseManager();
+    
+    public QuationJFrame(int levelNumb, int subjectNumb) {
+        this.levelNumb = levelNumb;
+        this.subjectNumb =  subjectNumb;
         initComponents();
 	setupAnswers();
     }
 
     private void setupAnswers() {
         try {
-            Task task = databasemanager.getTaskWithCorrectAnswer(level_num, subject_num);
+            Task task = dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb);
             if (task == null) return;
 
-            List<IncorrectAnswers> answers = databasemanager.getUncorrectAnswerForTask(
-                task.getTaskId(), subject_num);
+            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswerForTask(
+                task.getTaskId(), subjectNumb);
 
             if (answers != null && answers.size() == 4) {
                 var1Label.setText(answers.get(0).getAnswerText());
@@ -71,7 +71,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout(0, 5));
 
-        questionLabel.setText(databasemanager.getLevel(level_num).getName());
+        questionLabel.setText(dbManager.getLevel(levelNumb).getName());
         questionLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         questionLabel.setPreferredSize(new java.awt.Dimension(57, 20));
         jPanel1.add(questionLabel, java.awt.BorderLayout.PAGE_START);
@@ -118,7 +118,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText(databasemanager.getTaskWithCorrectAnswer(level_num,subject_num).getDescription());
+        questionTextArea.setText(dbManager.getTaskWithCorrectAnswer(levelNumb,subjectNumb).getDescription());
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
@@ -141,7 +141,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        JokesJFrame jokesJFrame = new JokesJFrame(level_num,subject_num,databasemanager);
+        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb);
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

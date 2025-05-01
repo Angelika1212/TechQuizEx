@@ -1,16 +1,13 @@
 package ui;
-import db.DatabaseManager;
 import ui_components.RoundJButton;
 
 public class JokesJFrame extends javax.swing.JFrame {
-    private int level_num;
-    private int subject_num;
-    private DatabaseManager databasemanager;
+    private int levelNumb;
+    private int subjectNumb;
 
-    public JokesJFrame(int level_num, int subject_num, DatabaseManager databasemanager) {
-        this.level_num =  level_num;
-        this.subject_num = subject_num;
-        this.databasemanager = databasemanager;
+    public JokesJFrame(int levelNumb, int subjectNumb) {
+        this.levelNumb =  levelNumb;
+        this.subjectNumb = subjectNumb;
         initComponents();
     }
 
@@ -104,7 +101,7 @@ public class JokesJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backToQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToQuizButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(level_num, subject_num,databasemanager);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backToQuizButtonActionPerformed

@@ -4,21 +4,19 @@ import ui_components.RoundJButton;
 
 
 public class LevelMapJFrame extends javax.swing.JFrame {
-    private int subject_num;
+    private int  subjectNumb;
     private int userId;
-    private DatabaseManager databasemanager;
-    public LevelMapJFrame(int subject_num, DatabaseManager databasemanager, int userId) {
-        this.subject_num = subject_num;
-        this.databasemanager = databasemanager;
+    
+    public LevelMapJFrame(int subjectNumb, int userId) {
+        this. subjectNumb =  subjectNumb;
         this.userId = userId;
         initComponents();
     }
 
-    private void levelFunc(int level_num, int subject_num){
-        QuationJFrame quationJFrame = new QuationJFrame(level_num, subject_num, databasemanager);
+    private void loadLevel(int levelNumb, int  subjectNumb){
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
         quationJFrame.setVisible(true);
         dispose();
-           
     }
     
     @SuppressWarnings("unchecked")
@@ -170,48 +168,47 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void level1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ButtonActionPerformed
-        levelFunc(1,subject_num);
+        loadLevel(1,  subjectNumb);
     }//GEN-LAST:event_level1ButtonActionPerformed
 
     private void level2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level2ButtonActionPerformed
-        levelFunc(2,subject_num);
+        loadLevel(2,  subjectNumb);
     }//GEN-LAST:event_level2ButtonActionPerformed
 
     private void level3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level3ButtonActionPerformed
-        levelFunc(3,subject_num);
+        loadLevel(3,  subjectNumb);
     }//GEN-LAST:event_level3ButtonActionPerformed
 
     private void level4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level4ButtonActionPerformed
-        levelFunc(4,subject_num);
+        loadLevel(4,  subjectNumb);
     }//GEN-LAST:event_level4ButtonActionPerformed
 
     private void level5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level5ButtonActionPerformed
-        levelFunc(5,subject_num);
+        loadLevel(5,  subjectNumb);
     }//GEN-LAST:event_level5ButtonActionPerformed
 
     private void level6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level6ButtonActionPerformed
-        levelFunc(6,subject_num);
+        loadLevel(6,  subjectNumb);
     }//GEN-LAST:event_level6ButtonActionPerformed
 
     private void level7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level7ButtonActionPerformed
-        levelFunc(7,subject_num);
+        loadLevel(7, subjectNumb);
     }//GEN-LAST:event_level7ButtonActionPerformed
 
     private void level8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level8ButtonActionPerformed
-        levelFunc(8,subject_num);
+        loadLevel(8, subjectNumb);
     }//GEN-LAST:event_level8ButtonActionPerformed
 
     private void level9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level9ButtonActionPerformed
-        levelFunc(9,subject_num);
-
+        loadLevel(9, subjectNumb);
     }//GEN-LAST:event_level9ButtonActionPerformed
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        levelFunc(10,subject_num);
+        loadLevel(10, subjectNumb);
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(databasemanager, userId);
+        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(userId);
         subjectSelectJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
