@@ -256,7 +256,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_var1LabelPropertyChange
 
     private void exitDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDevButtonActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_exitDevButtonActionPerformed
 
     private void nextQuestionDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionDevButtonActionPerformed
