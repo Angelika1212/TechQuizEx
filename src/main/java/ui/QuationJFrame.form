@@ -130,10 +130,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="var1LabelMouseClicked"/>
-<<<<<<< HEAD
                     <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="var1LabelPropertyChange"/>
-=======
->>>>>>> b5011dd6f91efff3ba2890bbe90c78aeec4bfdee
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="var2Label">
@@ -209,11 +206,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-<<<<<<< HEAD
                       <Connection code="dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb).getDescription()" type="code"/>
-=======
-                      <Connection code="&quot;&quot;" type="code"/>
->>>>>>> b5011dd6f91efff3ba2890bbe90c78aeec4bfdee
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
