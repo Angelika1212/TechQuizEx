@@ -80,9 +80,30 @@ public class DatabaseManager {
             return false;
         }
     }
+    public ArrayList<Task> getTasks(int levelId, int subject) {
+        ArrayList<Task> allTasks = new ArrayList<>();
 
-    public Task getTaskWithCorrectAnswer(int taskId, int subject) {
-        String query = "SELECT description, correct_answer FROM task WHERE level_id = ? AND subject = ?";
+        String query = "SELECT task_id, description, correct_answer FROM task WHERE level_id = ? AND subject = ?";
+        
+        try(PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, levelId);
+            stmt.setInt(2, subject);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String description = rs.getString("description");
+                String correctAnswer = rs.getString("correct_answer");
+                int taskId = rs.getInt("task_id");
+                allTasks.add(new Task(taskId, subject, levelId, description, correctAnswer));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allTasks;
+    }
+    
+    public Task getTask(int taskId, int subject) {
+        String query = "SELECT level_id, description, correct_answer FROM task WHERE task_id = ? AND subject = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, taskId);
@@ -92,7 +113,8 @@ public class DatabaseManager {
             if (rs.next()) {
                 String description = rs.getString("description");
                 String correctAnswer = rs.getString("correct_answer");
-                return new Task(taskId, subject, description, correctAnswer);
+                int levelId = rs.getInt("level_id");
+                return new Task(taskId, subject, levelId, description, correctAnswer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,8 +122,8 @@ public class DatabaseManager {
         return null;
     }
     
-    public ArrayList<IncorrectAnswers> getUncorrectAnswerForTask(int taskId, int subject) {
-        Task task = getTaskWithCorrectAnswer(taskId, subject);
+    public ArrayList<IncorrectAnswers> getUncorrectAnswersForTask(int taskId, int subject) {
+        Task task = getTask(taskId, subject);
         if (task == null || task.getCorrectAnswer() == null) {
             return null;
         }

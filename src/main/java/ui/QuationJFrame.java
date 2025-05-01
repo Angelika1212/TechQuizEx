@@ -1,34 +1,48 @@
 package ui;
+
 import db.DatabaseManager;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.IncorrectAnswers;
 import model.Task;
 import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
 public class QuationJFrame extends javax.swing.JFrame {
+
+    private String userAnswer;
     private int levelNumb;
+    private int quastionNumb = 0;
+    private String correctAnswer;
+
+    private int taskNumb;
     private int subjectNumb;
     private final DatabaseManager dbManager;
-    
+
     public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
         this.dbManager = dbManager;
+        this.subjectNumb = subjectNumb;
         this.levelNumb = levelNumb;
-        this.subjectNumb =  subjectNumb;
         initComponents();
-	setupAnswers();
+        setupQuastion();
     }
 
-    private void setupAnswers() {
+    private void setupQuastion() {
         try {
-            Task task = dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb);
-            if (task == null) return;
+            Task task = dbManager.getTasks(levelNumb, subjectNumb).get(quastionNumb);
+            if (task == null) {
+                return;
+            }
+            correctAnswer = task.getCorrectAnswer();
+            questionTextArea.setText(task.getDescription());
+            jLabel1.setText("Задание #" + task.getTaskId());
 
-            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswerForTask(
-                task.getTaskId(), subjectNumb);
+            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswersForTask(
+                    task.getTaskId(), subjectNumb);
 
             if (answers != null && answers.size() == 4) {
                 var1Label.setText(answers.get(0).getAnswerText());
@@ -36,8 +50,65 @@ public class QuationJFrame extends javax.swing.JFrame {
                 var3Label.setText(answers.get(2).getAnswerText());
                 var4Label.setText(answers.get(3).getAnswerText());
             }
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private String chooseAnswer(javax.swing.JLabel varIlabel) {
+        String choseAnswer;
+        ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
+        labels.add(this.var1Label);
+        labels.add(this.var2Label);
+        labels.add(this.var3Label);
+        labels.add(this.var4Label);
+        for (javax.swing.JLabel panel : labels) {
+            if (panel != varIlabel) {
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+        }
+        varIlabel.setOpaque(true);
+        varIlabel.setBackground(Color.lightGray);
+        choseAnswer = varIlabel.getText();
+        this.userAnswer = choseAnswer;
+        IsAnswerOfUserIsCorrect();
+        return choseAnswer;
+    }
+
+    private void IsAnswerOfUserIsCorrect() {
+        ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
+        labels.add(this.var1Label);
+        labels.add(this.var2Label);
+        labels.add(this.var3Label);
+        labels.add(this.var4Label);
+
+        for (javax.swing.JLabel panel : labels) {
+            if (panel.getText().equals(correctAnswer)) {
+                panel.setOpaque(true);
+                panel.setBackground(Color.green);
+            } else {
+                panel.setOpaque(true);
+                panel.setBackground(Color.red);
+            }
+        }
+
+        if (userAnswer.equals(correctAnswer)) {
+            JOptionPane.showMessageDialog(this, "Молодец! Идём к следующей задаче!");
+            quastionNumb++;
+            for (javax.swing.JLabel panel : labels) {
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+            setupQuastion();
+        } else {
+            JOptionPane.showMessageDialog(this, "Попробуй ещё раз!");
+            for (javax.swing.JLabel panel : labels) {
+                panel.setOpaque(false);
+                panel.setBackground(null);
+            }
+            setupQuastion();
         }
     }
 
@@ -105,11 +176,7 @@ public class QuationJFrame extends javax.swing.JFrame {
                 var1LabelMouseClicked(evt);
             }
         });
-        var1Label.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                var1LabelPropertyChange(evt);
-            }
-        });
+		
         jPanel2.add(var1Label);
 
         var2Label.setText("");
@@ -148,7 +215,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         questionTextArea.setEditable(false);
         questionTextArea.setColumns(20);
         questionTextArea.setRows(5);
-        questionTextArea.setText(dbManager.getTaskWithCorrectAnswer(levelNumb, subjectNumb).getDescription());
+        questionTextArea.setText(dbManager.getTask(levelNumb, subjectNumb).getDescription());
         questionTextArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         questionTextArea.setMargin(new java.awt.Insets(20, 20, 10, 10));
         jScrollPane1.setViewportView(questionTextArea);
@@ -160,11 +227,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel5.add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel11.add(jPanel5);
-
-        getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
-        getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
-        getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
-
+		
         jPanel4.setMaximumSize(new java.awt.Dimension(32767, 20));
         jPanel4.setPreferredSize(new java.awt.Dimension(705, 20));
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -177,6 +240,7 @@ public class QuationJFrame extends javax.swing.JFrame {
                 exitDevButtonActionPerformed(evt);
             }
         });
+		
         jPanel4.add(exitDevButton, java.awt.BorderLayout.WEST);
 
         nextQuestionDevButton.setBackground(new java.awt.Color(242, 242, 242));
@@ -187,11 +251,9 @@ public class QuationJFrame extends javax.swing.JFrame {
                 nextQuestionDevButtonActionPerformed(evt);
             }
         });
+		
         jPanel4.add(nextQuestionDevButton, java.awt.BorderLayout.EAST);
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
-
-        jPanel6.setMaximumSize(new java.awt.Dimension(32767, 20));
+		jPanel6.setMaximumSize(new java.awt.Dimension(32767, 20));
         jPanel6.setMinimumSize(new java.awt.Dimension(10, 20));
         jPanel6.setPreferredSize(new java.awt.Dimension(705, 20));
         jPanel6.setLayout(new java.awt.BorderLayout());
@@ -215,7 +277,11 @@ public class QuationJFrame extends javax.swing.JFrame {
             }
         });
         jPanel6.add(backDevButton, java.awt.BorderLayout.WEST);
-
+		
+        getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
+        getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
         getContentPane().add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         pack();
@@ -226,34 +292,6 @@ public class QuationJFrame extends javax.swing.JFrame {
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
-
-    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var1LabelMouseClicked
-        String user_answer = this.var1Label.getText();
-        this.var1Label.setOpaque(true);
-        this.var1Label.setBackground(Color.green);
-    }//GEN-LAST:event_var1LabelMouseClicked
-
-    private void var2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
-        String user_answer = this.var2Label.getText();
-        this.var2Label.setOpaque(true);
-        this.var2Label.setBackground(Color.green);
-    }//GEN-LAST:event_var2LabelMouseClicked
-
-    private void var3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var3LabelMouseClicked
-        String user_answer = this.var3Label.getText();
-        this.var3Label.setOpaque(true);
-        this.var3Label.setBackground(Color.green);
-    }//GEN-LAST:event_var3LabelMouseClicked
-
-    private void var4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var4LabelMouseClicked
-        String user_answer = this.var4Label.getText();
-        this.var4Label.setOpaque(true);
-        this.var4Label.setBackground(Color.green);
-    }//GEN-LAST:event_var4LabelMouseClicked
-
-    private void var1LabelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_var1LabelPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_var1LabelPropertyChange
 
     private void exitDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDevButtonActionPerformed
         System.exit(0);
@@ -270,6 +308,22 @@ public class QuationJFrame extends javax.swing.JFrame {
     private void backDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backDevButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backDevButtonActionPerformed
+
+    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
+        chooseAnswer(var1Label);
+    }//GEN-LAST:event_var2LabelMouseClicked
+	
+    private void var2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
+        chooseAnswer(var2Label);
+    }//GEN-LAST:event_var2LabelMouseClicked
+
+    private void var3LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var3LabelMouseClicked
+        chooseAnswer(var3Label);
+    }//GEN-LAST:event_var3LabelMouseClicked
+
+    private void var4LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var4LabelMouseClicked
+        chooseAnswer(var4Label);
+    }//GEN-LAST:event_var4LabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backDevButton;

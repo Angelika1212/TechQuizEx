@@ -3,9 +3,9 @@ import db.DatabaseManager;
 import ui_components.RoundJButton;
 
 public class JokesJFrame extends javax.swing.JFrame {
-    private int levelNumb;
     private int subjectNumb;
     private final DatabaseManager dbManager;
+    private int levelNumb;
 
     public JokesJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
         this.dbManager = dbManager;

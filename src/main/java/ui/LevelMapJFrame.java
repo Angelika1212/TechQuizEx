@@ -4,7 +4,7 @@ import ui_components.RoundJButton;
 
 
 public class LevelMapJFrame extends javax.swing.JFrame {
-    private int  subjectNumb;
+    private int subjectNumb;
     private int userId;
     private final DatabaseManager dbManager;
     

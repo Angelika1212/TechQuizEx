@@ -1,16 +1,18 @@
 package model;
 
 public class Task {
-    private int task_id;
+    private int taskId;
     private int subject;
+    private int levelId;
     private String description;
     private String correctAnswer;
     
     public Task() {}
 
-    public Task(int task_id, int subject, String description, String correctAnswer) {
-        this.task_id = task_id;
+    public Task(int taskId, int levelId, int subject, String description, String correctAnswer) {
+        this.taskId = taskId;
         this.subject = subject;
+        this.levelId = levelId;
         this.description = description;
         this.correctAnswer = correctAnswer;
     }
@@ -28,11 +30,19 @@ public class Task {
     }
 
     public int getTaskId() {
-        return task_id;
+        return taskId;
     }
 
-    public void setTask_id(int task_id) {
-        this.task_id = task_id;
+    public void setTask_id(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
     }
 
     public void setSubject(int subject) {
