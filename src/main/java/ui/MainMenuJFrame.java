@@ -7,8 +7,10 @@ import ui_components.RoundJPanel;
 
 public class MainMenuJFrame extends javax.swing.JFrame {
     private int userId;
+    private final DatabaseManager dbManager;
     
-    public MainMenuJFrame(int userId) {
+    public MainMenuJFrame(DatabaseManager dbManager, int userId) {
+        this.dbManager = dbManager;
         this.userId = userId;
         initComponents();
     }
@@ -81,13 +83,13 @@ public class MainMenuJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void achivementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_achivementButtonActionPerformed
-        AchievementsWindow achievementWindow = new AchievementsWindow(new DatabaseManager(), userId);
+        AchievementsWindow achievementWindow = new AchievementsWindow(dbManager, userId);
         achievementWindow.setVisible(true);
         dispose();
     }//GEN-LAST:event_achivementButtonActionPerformed
 
     private void levelMapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_levelMapButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJForm = new SubjectSelectJFrame(userId);
+        SubjectSelectJFrame subjectSelectJForm = new SubjectSelectJFrame(dbManager, userId);
         subjectSelectJForm.setVisible(true);
         dispose();
     }//GEN-LAST:event_levelMapButtonActionPerformed

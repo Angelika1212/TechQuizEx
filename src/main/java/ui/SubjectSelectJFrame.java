@@ -1,12 +1,15 @@
 package ui;
 
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 import ui_components.RoundJPanel;
 
 public class SubjectSelectJFrame extends javax.swing.JFrame {
     private int userId;
+    private final DatabaseManager dbManager;
     
-    public SubjectSelectJFrame(int userId) {
+    public SubjectSelectJFrame(DatabaseManager dbManager, int userId) {
+        this.dbManager = dbManager;
         this.userId = userId;
         initComponents();
     }
@@ -121,25 +124,25 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1, userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1, userId, dbManager);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2, userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2, userId, dbManager);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_linearAlgebraButtonActionPerformed
 
     private void programmingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmingButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3, userId);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3, userId, dbManager);
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_programmingButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainMenuJFrame mainMenu = new MainMenuJFrame(userId);
+        MainMenuJFrame mainMenu = new MainMenuJFrame(dbManager, userId);
         mainMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

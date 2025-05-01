@@ -11,9 +11,10 @@ import ui_components.RoundJTextArea;
 public class QuationJFrame extends javax.swing.JFrame {
     private int levelNumb;
     private int subjectNumb;
-    private final DatabaseManager dbManager = new DatabaseManager();
+    private final DatabaseManager dbManager;
     
-    public QuationJFrame(int levelNumb, int subjectNumb) {
+    public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
+        this.dbManager = dbManager;
         this.levelNumb = levelNumb;
         this.subjectNumb =  subjectNumb;
         initComponents();
@@ -141,7 +142,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb);
+        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb, dbManager);
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

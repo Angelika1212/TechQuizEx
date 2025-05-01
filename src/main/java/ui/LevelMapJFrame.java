@@ -6,15 +6,17 @@ import ui_components.RoundJButton;
 public class LevelMapJFrame extends javax.swing.JFrame {
     private int  subjectNumb;
     private int userId;
+    private final DatabaseManager dbManager;
     
-    public LevelMapJFrame(int subjectNumb, int userId) {
+    public LevelMapJFrame(int subjectNumb, int userId, DatabaseManager dbManager) {
+        this.dbManager = dbManager;
         this. subjectNumb =  subjectNumb;
         this.userId = userId;
         initComponents();
     }
 
     private void loadLevel(int levelNumb, int  subjectNumb){
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, dbManager);
         quationJFrame.setVisible(true);
         dispose();
     }
@@ -208,7 +210,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(userId);
+        SubjectSelectJFrame subjectSelectJFrame = new SubjectSelectJFrame(dbManager, userId);
         subjectSelectJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed

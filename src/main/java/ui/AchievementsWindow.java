@@ -46,7 +46,7 @@ public class AchievementsWindow extends JFrame {
         RoundJButton  backButton =  new  RoundJButton("Назад");
         backButton.setPreferredSize(new Dimension(100,30));
         backButton.addActionListener(e ->  { 
-            new MainMenuJFrame(userId).setVisible(true);
+            new MainMenuJFrame(databasemanager, userId).setVisible(true);
             dispose(); 
         });
         bottomPanel.add(backButton);

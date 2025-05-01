@@ -86,7 +86,7 @@ public class LoginJFrame extends JFrame {
     private void openMainMenu(int userId) {
         JOptionPane.showMessageDialog(this, "Добро пожаловать!");
 
-        MainMenuJFrame mainMenu = new MainMenuJFrame(userId);
+        MainMenuJFrame mainMenu = new MainMenuJFrame(dbManager, userId);
         mainMenu.setVisible(true);
         dispose();
     }

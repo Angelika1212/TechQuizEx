@@ -1,11 +1,14 @@
 package ui;
+import db.DatabaseManager;
 import ui_components.RoundJButton;
 
 public class JokesJFrame extends javax.swing.JFrame {
     private int levelNumb;
     private int subjectNumb;
+    private final DatabaseManager dbManager;
 
-    public JokesJFrame(int levelNumb, int subjectNumb) {
+    public JokesJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
+        this.dbManager = dbManager;
         this.levelNumb =  levelNumb;
         this.subjectNumb = subjectNumb;
         initComponents();
@@ -97,11 +100,13 @@ public class JokesJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        // TODO add your handling code here:
+        QuationJFrame quationJFrame = new QuationJFrame(10, subjectNumb, dbManager);
+        quationJFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backToQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToQuizButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, dbManager);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backToQuizButtonActionPerformed
