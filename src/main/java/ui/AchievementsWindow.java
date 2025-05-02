@@ -15,7 +15,7 @@ public class AchievementsWindow extends JFrame {
     private JPanel achievementsPanel;   
     private DatabaseManager databasemanager;
     private int userId;
-    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В,"};
+    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В."};
     private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*15];
     
     private void setAchievementArr(){
@@ -32,7 +32,7 @@ public class AchievementsWindow extends JFrame {
         this.userId = userId;
         setAchievementArr();
         setTitle("Достижения");
-        setSize(800, 650);
+        setSize(800, 750);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -66,7 +66,7 @@ public class AchievementsWindow extends JFrame {
         achievementsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(new JScrollPane(achievementsPanel), BorderLayout.CENTER);
 
-        updateAchievements(1); // Загрузить достижения для первого преподавателя
+        updateAchievements(0); // Загрузить достижения для первого преподавателя
         setVisible(true);
     }
 
@@ -75,8 +75,24 @@ public class AchievementsWindow extends JFrame {
         panel.removeAll();
         
         String[] achievements = ACHIEVEMENTS[teacherIndex];
-        for (int i = 1; i < achievements.length; i++) {
-            AchievementPanel achievementPanel = new AchievementPanel(achievements[i], databasemanager.getAchievement(i).getDescription() + achievements[i], false);
+        int left = 0;
+        int right = 0;
+        switch(teacherIndex){
+            case 0 -> {
+                left = 0;
+                right = 15;
+            }
+            case 1 -> {
+                left = 15;
+                right = 30;
+            }
+            case 2 -> {
+                left = 30;
+                right = 45;
+            }
+        }
+        for (int i = left; i < right; i++) {
+            AchievementPanel achievementPanel = new AchievementPanel(achievements[i], databasemanager.getAchievement(i + 1).getDescription() + achievements[i], false);
             panel.add(achievementPanel);
         }
 
