@@ -7,12 +7,14 @@ public class JokesJFrame extends javax.swing.JFrame {
     private final DatabaseManager dbManager;
     private int levelNumb;
     private int questionNumb;
+    private int userId;
 
-    public JokesJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager) {
+    public JokesJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager, int userId) {
         this.dbManager = dbManager;
         this.levelNumb =  levelNumb;
         this.subjectNumb = subjectNumb;
         this.questionNumb = questionNumb;
+        this.userId = userId;
         initComponents();
     }
 
@@ -102,13 +104,13 @@ public class JokesJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(10, subjectNumb, dbManager);
+        QuationJFrame quationJFrame = new QuationJFrame(10, subjectNumb, dbManager, userId);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backToQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToQuizButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, questionNumb, dbManager);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, questionNumb, dbManager, userId);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backToQuizButtonActionPerformed

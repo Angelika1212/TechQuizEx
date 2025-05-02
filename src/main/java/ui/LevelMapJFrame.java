@@ -1,24 +1,54 @@
 package ui;
 import db.DatabaseManager;
+import java.util.ArrayList;
 import ui_components.RoundJButton;
 
 
 public class LevelMapJFrame extends javax.swing.JFrame {
     private int subjectNumb;
     private int userId;
+    private int openLevelNumb = 1;
     private final DatabaseManager dbManager;
     
-    public LevelMapJFrame(int subjectNumb, int userId, DatabaseManager dbManager) {
+    public LevelMapJFrame(int subjectNumb, int userId, DatabaseManager dbManager, int openLevelNumb) {
         this.dbManager = dbManager;
-        this. subjectNumb =  subjectNumb;
+        this.subjectNumb =  subjectNumb;
         this.userId = userId;
+        this.openLevelNumb = openLevelNumb;
         initComponents();
+        checkOpenLevelNumb(openLevelNumb, subjectNumb);
     }
 
     private void loadLevel(int levelNumb, int  subjectNumb){
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, dbManager);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, dbManager, userId);
         quationJFrame.setVisible(true);
         dispose();
+    }
+    
+    private void checkOpenLevelNumb(int openLevelNumb, int  subjectNumb){
+        ArrayList<javax.swing.JButton> buttons = new ArrayList<>();
+        buttons.add((RoundJButton) level1Button);
+        buttons.add((RoundJButton) level2Button);
+        buttons.add((RoundJButton) level3Button);
+        buttons.add((RoundJButton) level4Button);
+        buttons.add((RoundJButton) level5Button);
+        buttons.add((RoundJButton) level6Button);
+        buttons.add((RoundJButton) level7Button);
+        buttons.add((RoundJButton) level8Button);
+        buttons.add((RoundJButton) level9Button);
+        buttons.add((RoundJButton) examButton);
+        for(int i = 0; i < buttons.size() - 1; i++){
+            if(openLevelNumb < i + 1){
+                buttons.get(i).setText("Закрыто");
+                buttons.get(i).setEnabled(false);
+            }
+            else buttons.get(i).setText("Уровень " + (i + 1));
+        }
+        if(openLevelNumb == 10) buttons.get(9).setText("Экзамен");
+        else {
+            buttons.get(9).setText("Закрыто");
+            buttons.get(9).setEnabled(false);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -170,43 +200,43 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void level1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ButtonActionPerformed
-        loadLevel(1,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level1ButtonActionPerformed
 
     private void level2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level2ButtonActionPerformed
-        loadLevel(2,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level2ButtonActionPerformed
 
     private void level3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level3ButtonActionPerformed
-        loadLevel(3,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level3ButtonActionPerformed
 
     private void level4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level4ButtonActionPerformed
-        loadLevel(4,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level4ButtonActionPerformed
 
     private void level5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level5ButtonActionPerformed
-        loadLevel(5,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level5ButtonActionPerformed
 
     private void level6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level6ButtonActionPerformed
-        loadLevel(6,  subjectNumb);
+        loadLevel(openLevelNumb,  subjectNumb);
     }//GEN-LAST:event_level6ButtonActionPerformed
 
     private void level7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level7ButtonActionPerformed
-        loadLevel(7, subjectNumb);
+        loadLevel(openLevelNumb, subjectNumb);
     }//GEN-LAST:event_level7ButtonActionPerformed
 
     private void level8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level8ButtonActionPerformed
-        loadLevel(8, subjectNumb);
+        loadLevel(openLevelNumb, subjectNumb);
     }//GEN-LAST:event_level8ButtonActionPerformed
 
     private void level9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level9ButtonActionPerformed
-        loadLevel(9, subjectNumb);
+        loadLevel(openLevelNumb, subjectNumb);
     }//GEN-LAST:event_level9ButtonActionPerformed
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        loadLevel(10, subjectNumb);
+        loadLevel(openLevelNumb, subjectNumb);
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

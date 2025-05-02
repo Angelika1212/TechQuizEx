@@ -34,7 +34,7 @@ public class RegisterJFrame extends JFrame {
         registerButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
-            User user = new User(username, password);
+            User user = new User(username, password, 1);
 
             if (dbManager.addUser(user)) {
                 messageLabel.setText("✅ Регистрация успешна!");
