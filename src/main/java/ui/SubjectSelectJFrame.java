@@ -124,19 +124,19 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void statisticSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticSubjectButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1, userId, dbManager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(1, userId, dbManager, dbManager.getUser(userId).getOpenedLevels());
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_statisticSubjectButtonActionPerformed
 
     private void linearAlgebraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linearAlgebraButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2, userId, dbManager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(2, userId, dbManager,dbManager.getUser(userId).getOpenedLevels());
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_linearAlgebraButtonActionPerformed
 
     private void programmingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_programmingButtonActionPerformed
-        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3, userId, dbManager);
+        LevelMapJFrame levelMapJFrame = new LevelMapJFrame(3, userId, dbManager,dbManager.getUser(userId).getOpenedLevels());
         levelMapJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_programmingButtonActionPerformed

@@ -52,6 +52,38 @@ public class DatabaseManager {
         }
     }
     
+    public boolean editUserOpenedLevels(int user_id, int openedLevel) {
+        String insertQuery = "UPDATE users SET opened_levels = ? WHERE user_id = ?";
+        
+        try (PreparedStatement updateStmt = connection.prepareStatement(insertQuery)){
+            updateStmt.setInt(1, openedLevel);
+            updateStmt.setInt(2, openedLevel);
+            updateStmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public User getUser(int userId) {
+        String query = "SELECT * FROM users WHERE user_id = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(query)){
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                String login = rs.getString("login");
+                String password = rs.getString("password");
+                int openedLevels = rs.getInt("opened_levels");
+                return new User(login, password, openedLevels);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public int getUserId(User user){        
         String query = "SELECT user_id FROM users WHERE login = ? AND password = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {

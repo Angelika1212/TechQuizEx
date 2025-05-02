@@ -18,24 +18,27 @@ public class QuationJFrame extends javax.swing.JFrame {
     private int levelNumb;
     private int quastionNumb = 0;
     private String correctAnswer;
-
+    
     private int taskNumb;
     private int subjectNumb;
     private final DatabaseManager dbManager;
-
-    public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
+    private int userId;
+    
+    public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager, int userId) {
         this.dbManager = dbManager;
         this.subjectNumb = subjectNumb;
         this.levelNumb = levelNumb;
+        this.userId = userId;
         initComponents();
         setupQuastion();
     }
     
-    public QuationJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager) {
+    public QuationJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager, int userId) {
         this.dbManager = dbManager;
         this.subjectNumb = subjectNumb;
         this.levelNumb = levelNumb;
         this.quastionNumb = questionNumb;
+        this.userId = userId;
         initComponents();
         setupQuastion();
     }
@@ -108,7 +111,7 @@ public class QuationJFrame extends javax.swing.JFrame {
                 panel.setOpaque(false);
                 panel.setBackground(null);
             }
-            setupQuastion();
+            openNextLevel(quastionNumb);
         } else {
             JOptionPane.showMessageDialog(this, "Попробуй ещё раз!");
             for (javax.swing.JLabel panel : labels) {
@@ -117,6 +120,17 @@ public class QuationJFrame extends javax.swing.JFrame {
             }
             setupQuastion();
         }
+    }
+    
+    private void openNextLevel(int quastionNumb){
+        if(quastionNumb == 10){
+            levelNumb++;
+            dbManager.editUserOpenedLevels(userId, levelNumb);
+            LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
+            subjectSelectJFrame.setVisible(true);
+            dispose();
+        }
+        else setupQuastion();
     }
 
     @SuppressWarnings("unchecked")
@@ -295,7 +309,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb, quastionNumb, dbManager);
+        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb, quastionNumb, dbManager, userId);
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
