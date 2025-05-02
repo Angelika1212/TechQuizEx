@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import model.Achievement;
 import model.IncorrectAnswers;
+import model.Joke;
 import model.LevelDb;
 import model.Subject;
 import model.User;
@@ -22,7 +23,7 @@ import model.Task;
 public class DatabaseManager {
     private static final String URL = "jdbc:postgresql://localhost:5433/Tia";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "12345";
     private Connection connection;
 
     public DatabaseManager() {
@@ -256,4 +257,24 @@ public class DatabaseManager {
         }
         return false;
     }
+    
+    public ArrayList<Joke> loadJokes(){
+        String sqlQury = "SELECT description, image FROM joke";
+        ArrayList<Joke> jokes = new ArrayList<>();
+        
+        try(PreparedStatement stmt = connection.prepareStatement(sqlQury)) {
+            ResultSet resultSet = stmt.executeQuery();
+            
+            while (resultSet.next()) {
+                Joke joke = new Joke(resultSet.getString("description"), 
+                        resultSet.getString("image"));
+                jokes.add(joke);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        Collections.shuffle(jokes);
+        return jokes;
+    }   
 }

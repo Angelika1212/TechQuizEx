@@ -1,5 +1,7 @@
 package ui;
 import db.DatabaseManager;
+import java.util.List;
+import model.Joke;
 import ui_components.RoundJButton;
 
 public class JokesJFrame extends javax.swing.JFrame {
@@ -7,12 +9,14 @@ public class JokesJFrame extends javax.swing.JFrame {
     private final DatabaseManager dbManager;
     private int levelNumb;
     private int questionNumb;
+    private List<Joke> jokes;
 
     public JokesJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager) {
         this.dbManager = dbManager;
         this.levelNumb =  levelNumb;
         this.subjectNumb = subjectNumb;
         this.questionNumb = questionNumb;
+        this.jokes = dbManager.loadJokes();
         initComponents();
     }
 
@@ -45,17 +49,17 @@ public class JokesJFrame extends javax.swing.JFrame {
         jokesTextArea.setEditable(false);
         jokesTextArea.setColumns(20);
         jokesTextArea.setRows(5);
-        jokesTextArea.setText("\n— Сколько же на корабле верных нам людей?\n— Нас семеро! Вместе с Джимом!\n— Ха-ха-ха-ха! Против девятнадцати.\n— Я буду драться за двоих! Нет, за четверых!\n     За двенадцать! За три… з-з-за… \n     Разрешите идти, сэр, выполнять долг?! \n— ....\n— Есть, сэр! Кру-гом! Шагом марш! \n   Ать-два, ать-два, ать-два, ать-два…\n");
+        jokesTextArea.setText(jokes.get(0).getDescription());
         jokesTextArea.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
         jScrollPane1.setViewportView(jokesTextArea);
 
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jokeNameLabel.setText("Шутки от мишутки:");
+        jokeNameLabel.setText("Минутка юмора:");
         jokeNameLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.add(jokeNameLabel, java.awt.BorderLayout.PAGE_START);
 
-        warningLabel.setText("Предупреждение: Для завершения викторины пройдите экзамен!");
+        warningLabel.setText("⚠️ Предупреждение: Для завершения викторины пройдите экзамен!");
         warningLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange, java.awt.Color.orange));
         jPanel3.add(warningLabel, java.awt.BorderLayout.PAGE_END);
 
@@ -64,7 +68,7 @@ public class JokesJFrame extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.BorderLayout(0, 10));
 
         jokeImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jokeImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/firstJoke.png"))); // NOI18N
+        jokeImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(jokes.get(0).getImage())));
         jPanel2.add(jokeImage, java.awt.BorderLayout.CENTER);
 
         jPanel4.setPreferredSize(new java.awt.Dimension(352, 40));
@@ -72,6 +76,9 @@ public class JokesJFrame extends javax.swing.JFrame {
 
         backToQuizButton.setText("Вернуться к викторине");
         backToQuizButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        backToQuizButton.setMaximumSize(new java.awt.Dimension(150, 30));
+        backToQuizButton.setMinimumSize(new java.awt.Dimension(150, 30));
+        backToQuizButton.setPreferredSize(new java.awt.Dimension(150, 30));
         backToQuizButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToQuizButtonActionPerformed(evt);
@@ -81,6 +88,9 @@ public class JokesJFrame extends javax.swing.JFrame {
 
         examButton.setText("Готов сдать экзамен");
         examButton.setBorder(null);
+        examButton.setMaximumSize(new java.awt.Dimension(130, 30));
+        examButton.setMinimumSize(new java.awt.Dimension(130, 30));
+        examButton.setPreferredSize(new java.awt.Dimension(130, 30));
         examButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examButtonActionPerformed(evt);
@@ -99,6 +109,7 @@ public class JokesJFrame extends javax.swing.JFrame {
         getContentPane().add(filler4, java.awt.BorderLayout.PAGE_END);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
