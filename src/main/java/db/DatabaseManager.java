@@ -44,7 +44,7 @@ public class DatabaseManager {
         try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)){
             insertStmt.setString(1, user.getLogin());
             insertStmt.setString(2, user.getPassword());
-            insertStmt.executeUpdate();
+            insertStmt.executeUpdate(); 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,12 +52,34 @@ public class DatabaseManager {
         }
     }
     
-    public boolean editUserOpenedLevels(int user_id, int openedLevel) {
-        String insertQuery = "UPDATE users SET opened_levels = ? WHERE user_id = ?";
+    public boolean addUserSubjectProgress(int userId, int openedLevel) {
+        String insertQuery = "INSERT INTO user_subject_progress (user_id, subject_id, opened_levels) VALUES (?, ?, ?)";
+
+        try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+
+            for(int subjectId = 1; subjectId <= 3; subjectId++) {
+                insertStmt.setInt(1, userId);
+                insertStmt.setInt(2, subjectId);
+                insertStmt.setInt(3, openedLevel);
+                insertStmt.addBatch();
+            }
+
+            insertStmt.executeBatch();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean editUserOpenedLevels(int userId, int openedLevel, int subjectNumb) {
+        String insertQuery = "UPDATE user_subject_progress SET opened_levels = ? WHERE user_id = ? AND subject_id = ?";
         
         try (PreparedStatement updateStmt = connection.prepareStatement(insertQuery)){
             updateStmt.setInt(1, openedLevel);
-            updateStmt.setInt(2, openedLevel);
+            updateStmt.setInt(2, userId);
+            updateStmt.setInt(3, subjectNumb);
             updateStmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -66,6 +88,23 @@ public class DatabaseManager {
         }
     }
     
+    public int getOpenedLevels(int userId, int subjectNumb) {
+        String query = "SELECT opened_levels FROM user_subject_progress WHERE user_id = ? AND subject_id = ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(query)){
+            stmt.setInt(1, userId);
+            stmt.setInt(2, subjectNumb);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                int openedLevels = rs.getInt("opened_levels");
+                return openedLevels;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+        
     public User getUser(int userId) {
         String query = "SELECT * FROM users WHERE user_id = ?";
         
@@ -75,8 +114,7 @@ public class DatabaseManager {
             if (rs.next()){
                 String login = rs.getString("login");
                 String password = rs.getString("password");
-                int openedLevels = rs.getInt("opened_levels");
-                return new User(login, password, openedLevels);
+                return new User(login, password);
             }
         } catch (SQLException e) {
             e.printStackTrace();

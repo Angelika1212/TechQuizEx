@@ -34,9 +34,10 @@ public class RegisterJFrame extends JFrame {
         registerButton.addActionListener(e -> {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
-            User user = new User(username, password, 1);
+            User user = new User(username, password);
 
             if (dbManager.addUser(user)) {
+                dbManager.addUserSubjectProgress(dbManager.getUserId(user), 1);
                 messageLabel.setText("✅ Регистрация успешна!");
                 messageLabel.setForeground(new Color(0, 128, 0));
                 dispose();

@@ -16,7 +16,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
         this.userId = userId;
         this.openLevelNumb = openLevelNumb;
         initComponents();
-        checkOpenLevelNumb(openLevelNumb, subjectNumb);
+        checkOpenLevelNumb(openLevelNumb);
     }
 
     private void loadLevel(int levelNumb, int  subjectNumb){
@@ -25,7 +25,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
         dispose();
     }
     
-    private void checkOpenLevelNumb(int openLevelNumb, int  subjectNumb){
+    private void checkOpenLevelNumb(int openLevelNumb){
         ArrayList<javax.swing.JButton> buttons = new ArrayList<>();
         buttons.add((RoundJButton) level1Button);
         buttons.add((RoundJButton) level2Button);
@@ -200,43 +200,43 @@ public class LevelMapJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void level1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(1,  subjectNumb);
     }//GEN-LAST:event_level1ButtonActionPerformed
 
     private void level2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level2ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(2,  subjectNumb);
     }//GEN-LAST:event_level2ButtonActionPerformed
 
     private void level3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level3ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(3,  subjectNumb);
     }//GEN-LAST:event_level3ButtonActionPerformed
 
     private void level4ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level4ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(4,  subjectNumb);
     }//GEN-LAST:event_level4ButtonActionPerformed
 
     private void level5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level5ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(5,  subjectNumb);
     }//GEN-LAST:event_level5ButtonActionPerformed
 
     private void level6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level6ButtonActionPerformed
-        loadLevel(openLevelNumb,  subjectNumb);
+        loadLevel(6,  subjectNumb);
     }//GEN-LAST:event_level6ButtonActionPerformed
 
     private void level7ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level7ButtonActionPerformed
-        loadLevel(openLevelNumb, subjectNumb);
+        loadLevel(7, subjectNumb);
     }//GEN-LAST:event_level7ButtonActionPerformed
 
     private void level8ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level8ButtonActionPerformed
-        loadLevel(openLevelNumb, subjectNumb);
+        loadLevel(8, subjectNumb);
     }//GEN-LAST:event_level8ButtonActionPerformed
 
     private void level9ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level9ButtonActionPerformed
-        loadLevel(openLevelNumb, subjectNumb);
+        loadLevel(9, subjectNumb);
     }//GEN-LAST:event_level9ButtonActionPerformed
 
     private void examButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examButtonActionPerformed
-        loadLevel(openLevelNumb, subjectNumb);
+        loadLevel(10, subjectNumb);
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
