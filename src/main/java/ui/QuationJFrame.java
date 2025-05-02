@@ -30,6 +30,15 @@ public class QuationJFrame extends javax.swing.JFrame {
         initComponents();
         setupQuastion();
     }
+    
+    public QuationJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager) {
+        this.dbManager = dbManager;
+        this.subjectNumb = subjectNumb;
+        this.levelNumb = levelNumb;
+        this.quastionNumb = questionNumb;
+        initComponents();
+        setupQuastion();
+    }
 
     private void setupQuastion() {
         try {
@@ -139,7 +148,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         examDevButton = new javax.swing.JButton();
         backDevButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(700, 410));
 
@@ -176,7 +185,6 @@ public class QuationJFrame extends javax.swing.JFrame {
                 var1LabelMouseClicked(evt);
             }
         });
-		
         jPanel2.add(var1Label);
 
         var2Label.setText("");
@@ -227,7 +235,11 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel5.add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel11.add(jPanel5);
-		
+
+        getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
+        getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
+
         jPanel4.setMaximumSize(new java.awt.Dimension(32767, 20));
         jPanel4.setPreferredSize(new java.awt.Dimension(705, 20));
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -240,7 +252,6 @@ public class QuationJFrame extends javax.swing.JFrame {
                 exitDevButtonActionPerformed(evt);
             }
         });
-		
         jPanel4.add(exitDevButton, java.awt.BorderLayout.WEST);
 
         nextQuestionDevButton.setBackground(new java.awt.Color(242, 242, 242));
@@ -251,9 +262,11 @@ public class QuationJFrame extends javax.swing.JFrame {
                 nextQuestionDevButtonActionPerformed(evt);
             }
         });
-		
         jPanel4.add(nextQuestionDevButton, java.awt.BorderLayout.EAST);
-		jPanel6.setMaximumSize(new java.awt.Dimension(32767, 20));
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        jPanel6.setMaximumSize(new java.awt.Dimension(32767, 20));
         jPanel6.setMinimumSize(new java.awt.Dimension(10, 20));
         jPanel6.setPreferredSize(new java.awt.Dimension(705, 20));
         jPanel6.setLayout(new java.awt.BorderLayout());
@@ -277,18 +290,14 @@ public class QuationJFrame extends javax.swing.JFrame {
             }
         });
         jPanel6.add(backDevButton, java.awt.BorderLayout.WEST);
-		
-        getContentPane().add(jPanel11, java.awt.BorderLayout.CENTER);
-        getContentPane().add(filler1, java.awt.BorderLayout.LINE_START);
-        getContentPane().add(filler2, java.awt.BorderLayout.LINE_END);
-        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
         getContentPane().add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb, dbManager);
+        JokesJFrame jokesJFrame = new JokesJFrame(levelNumb, subjectNumb, quastionNumb, dbManager);
         jokesJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
@@ -298,20 +307,24 @@ public class QuationJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_exitDevButtonActionPerformed
 
     private void nextQuestionDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionDevButtonActionPerformed
-        // TODO add your handling code here:
+        this.quastionNumb = (this.quastionNumb < 10) ? this.quastionNumb++: 10;
+        setupQuastion();
     }//GEN-LAST:event_nextQuestionDevButtonActionPerformed
 
     private void examDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examDevButtonActionPerformed
-        // TODO add your handling code here:
+        this.levelNumb = 10;
+        this.quastionNumb = 0;
+        setupQuastion();
     }//GEN-LAST:event_examDevButtonActionPerformed
 
     private void backDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backDevButtonActionPerformed
-        // TODO add your handling code here:
+        this.quastionNumb = (this.quastionNumb > 0) ? this.quastionNumb--: 0;
+        setupQuastion();
     }//GEN-LAST:event_backDevButtonActionPerformed
 
-    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
+    private void var1LabelMouseClicked(java.awt.event.MouseEvent evt) {                                       
         chooseAnswer(var1Label);
-    }//GEN-LAST:event_var2LabelMouseClicked
+    }                                      
 	
     private void var2LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_var2LabelMouseClicked
         chooseAnswer(var2Label);

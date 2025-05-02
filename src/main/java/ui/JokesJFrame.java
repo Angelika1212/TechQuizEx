@@ -6,11 +6,13 @@ public class JokesJFrame extends javax.swing.JFrame {
     private int subjectNumb;
     private final DatabaseManager dbManager;
     private int levelNumb;
+    private int questionNumb;
 
-    public JokesJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager) {
+    public JokesJFrame(int levelNumb, int subjectNumb, int questionNumb, DatabaseManager dbManager) {
         this.dbManager = dbManager;
         this.levelNumb =  levelNumb;
         this.subjectNumb = subjectNumb;
+        this.questionNumb = questionNumb;
         initComponents();
     }
 
@@ -106,7 +108,7 @@ public class JokesJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_examButtonActionPerformed
 
     private void backToQuizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToQuizButtonActionPerformed
-        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, dbManager);
+        QuationJFrame quationJFrame = new QuationJFrame(levelNumb, subjectNumb, questionNumb, dbManager);
         quationJFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_backToQuizButtonActionPerformed
