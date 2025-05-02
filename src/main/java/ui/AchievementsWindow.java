@@ -15,7 +15,7 @@ public class AchievementsWindow extends JFrame {
     private JPanel achievementsPanel;   
     private DatabaseManager databasemanager;
     private int userId;
-    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Мирзеабасов О. А,"};
+    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В,"};
     private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*15];
     
     private void setAchievementArr(){

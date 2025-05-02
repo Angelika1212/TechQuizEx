@@ -122,18 +122,14 @@ public class DatabaseManager {
         return null;
     }
     
-    public ArrayList<IncorrectAnswers> getUncorrectAnswersForTask(int taskId, int subject) {
-        Task task = getTask(taskId, subject);
-        if (task == null || task.getCorrectAnswer() == null) {
-            return null;
-        }
+    public ArrayList<IncorrectAnswers> getAnswersForTask(Task task) {
         String correctAnswer = task.getCorrectAnswer();
 
         ArrayList<IncorrectAnswers> allAnswers = new ArrayList<>();
         Set<String> uniqueTexts = new HashSet<>(); // Для контроля уникальности
 
         try (PreparedStatement stmt = connection.prepareStatement("SELECT answer_text, answer_id FROM incorrect_answers WHERE task_id = ?")) {
-            stmt.setInt(1, taskId);
+            stmt.setInt(1, task.getTaskId());
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -50,8 +50,8 @@ public class QuationJFrame extends javax.swing.JFrame {
             questionTextArea.setText(task.getDescription());
             jLabel1.setText("Задание #" + task.getTaskId());
 
-            List<IncorrectAnswers> answers = dbManager.getUncorrectAnswersForTask(
-                    task.getTaskId(), subjectNumb);
+            List<IncorrectAnswers> answers = dbManager.getAnswersForTask(
+                    task);
 
             if (answers != null && answers.size() == 4) {
                 var1Label.setText(answers.get(0).getAnswerText());
@@ -66,7 +66,6 @@ public class QuationJFrame extends javax.swing.JFrame {
     }
 
     private String chooseAnswer(javax.swing.JLabel varIlabel) {
-        String choseAnswer;
         ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
         labels.add(this.var1Label);
         labels.add(this.var2Label);
@@ -80,10 +79,9 @@ public class QuationJFrame extends javax.swing.JFrame {
         }
         varIlabel.setOpaque(true);
         varIlabel.setBackground(Color.lightGray);
-        choseAnswer = varIlabel.getText();
-        this.userAnswer = choseAnswer;
+        this.userAnswer = varIlabel.getText();
         IsAnswerOfUserIsCorrect();
-        return choseAnswer;
+        return userAnswer;
     }
 
     private void IsAnswerOfUserIsCorrect() {
