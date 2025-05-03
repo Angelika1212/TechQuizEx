@@ -34,7 +34,7 @@ public class AchievementsWindow extends JFrame {
         setTitle("Достижения");
         setSize(800, 750);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));

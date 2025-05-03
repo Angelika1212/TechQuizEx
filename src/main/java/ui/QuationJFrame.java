@@ -23,7 +23,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     private int subjectNumb;
     private final DatabaseManager dbManager;
     private int userId;
-    
+        
     public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager, int userId) {
         this.dbManager = dbManager;
         this.subjectNumb = subjectNumb;
@@ -51,7 +51,7 @@ public class QuationJFrame extends javax.swing.JFrame {
             }
             correctAnswer = task.getCorrectAnswer();
             questionTextArea.setText(task.getDescription());
-            jLabel1.setText("Задание #" + task.getTaskId());
+            jLabel1.setText("Задание #" + (quastionNumb + 1));
 
             List<IncorrectAnswers> answers = dbManager.getAnswersForTask(
                     task);
@@ -125,7 +125,7 @@ public class QuationJFrame extends javax.swing.JFrame {
     private void openNextLevel(int quastionNumb){
         if(quastionNumb == 10){
             levelNumb++;
-            dbManager.editUserOpenedLevels(levelNumb, userId, subjectNumb);
+            dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
             LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
             subjectSelectJFrame.setVisible(true);
             dispose();
