@@ -16,12 +16,12 @@ public class AchievementsWindow extends JFrame {
     private DatabaseManager databasemanager;
     private int userId;
     private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В."};
-    private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*15];
+    private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*6];
     
     private void setAchievementArr(){
         ArrayList<Achievement> arr = databasemanager.getAchievements();
         for(int j = 0; j < 3; j++){
-            for(int i = 0; i < 45; i++){
+            for(int i = 0; i < 18; i++){
                 ACHIEVEMENTS[j][i] = arr.get(i).getName();
             }
         }
@@ -32,7 +32,7 @@ public class AchievementsWindow extends JFrame {
         this.userId = userId;
         setAchievementArr();
         setTitle("Достижения");
-        setSize(800, 750);
+        setSize(800, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -80,15 +80,15 @@ public class AchievementsWindow extends JFrame {
         switch(teacherIndex){
             case 0 -> {
                 left = 0;
-                right = 15;
+                right = 6;
             }
             case 1 -> {
-                left = 15;
-                right = 30;
+                left = 6;
+                right = 12;
             }
             case 2 -> {
-                left = 30;
-                right = 45;
+                left = 12;
+                right = 18;
             }
         }
         for (int i = left; i < right; i++) {
