@@ -312,7 +312,7 @@ public class DatabaseManager {
         return achievements;
     }
     
-    public boolean IsAchievementCompleted(int achievement_id, int user_id) {
+    /*public boolean IsAchievementCompleted(int achievement_id, int user_id) {
         String query = "SELECT complete FROM achievements WHERE achievement_id = ? AND user_id = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -326,7 +326,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
     
     public ArrayList<Joke> loadJokes(){
         String sqlQury = "SELECT description, image FROM joke";
@@ -347,4 +347,15 @@ public class DatabaseManager {
         Collections.shuffle(jokes);
         return jokes;
     }   
+    
+    public void addUserAchivement(int userId, int achivementId){
+        String sqlQuery = "INSERT INTO user_achievement VALUES (?, ?)";
+        try (PreparedStatement insert = connection.prepareStatement(sqlQuery)) {
+            insert.setInt(1, userId);
+            insert.setInt(2, achivementId);
+            insert.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
