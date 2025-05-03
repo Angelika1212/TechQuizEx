@@ -124,7 +124,8 @@ public class QuationJFrame extends javax.swing.JFrame {
     
     private void openNextLevel(int quastionNumb){
         if(quastionNumb == 10){
-            levelNumb++;
+            if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) != 10) levelNumb = 10;
+            else levelNumb++;
             dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
             LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
             subjectSelectJFrame.setVisible(true);
