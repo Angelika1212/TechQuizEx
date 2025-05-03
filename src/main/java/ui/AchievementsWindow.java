@@ -18,15 +18,11 @@ public class AchievementsWindow extends JFrame {
     private static ArrayList<Achievement> ACHIEVEMENTS;
     private ArrayList<Integer> userAchievement;
     
-    private void setAchievementArr(){
-        ArrayList<Achievement> ACHIEVEMENTS = databasemanager.getAchievements();
-    }
-   
     public AchievementsWindow(DatabaseManager databasemanager, int userId) {
         this.databasemanager = databasemanager;
         this.userId = userId;
         this.userAchievement = databasemanager.getUserAchievement(userId);
-        setAchievementArr();
+        this.ACHIEVEMENTS = databasemanager.getAchievements();
         setTitle("Достижения");
         setSize(800, 600);
         setLocationRelativeTo(null);
