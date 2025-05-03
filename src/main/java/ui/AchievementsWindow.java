@@ -15,18 +15,17 @@ public class AchievementsWindow extends JFrame {
     private JPanel achievementsPanel;   
     private DatabaseManager databasemanager;
     private int userId;
-    private static String[] ACHIEVEMENTS = new String[12];
+    private static ArrayList<Achievement> ACHIEVEMENTS;
+    private ArrayList<Integer> userAchievement;
     
     private void setAchievementArr(){
-        ArrayList<Achievement> arr = databasemanager.getAchievements();
-        for(int i = 0; i < 12; i++){
-            ACHIEVEMENTS[i] = arr.get(i).getName();
-        }
+        ArrayList<Achievement> ACHIEVEMENTS = databasemanager.getAchievements();
     }
    
     public AchievementsWindow(DatabaseManager databasemanager, int userId) {
         this.databasemanager = databasemanager;
         this.userId = userId;
+        this.userAchievement = databasemanager.getUserAchievement(userId);
         setAchievementArr();
         setTitle("Достижения");
         setSize(800, 600);
@@ -57,15 +56,17 @@ public class AchievementsWindow extends JFrame {
         achievementsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(new JScrollPane(achievementsPanel), BorderLayout.CENTER);
 
-        updateAchievements(); // Загрузить достижения для первого преподавателя
+        updateAchievements();
         setVisible(true);
     }
 
     private void updateAchievements() {
         JPanel panel = achievementsPanel;
         panel.removeAll(); 
-        for (int i = 0; i < ACHIEVEMENTS.length; i++) {
-            AchievementPanel achievementPanel = new AchievementPanel(ACHIEVEMENTS[i], databasemanager.getAchievement(i + 1).getDescription() + ACHIEVEMENTS[i], false);
+        for (int i = 0; i < ACHIEVEMENTS.size(); i++) {
+            AchievementPanel achievementPanel = new AchievementPanel(ACHIEVEMENTS.get(i).getName(), 
+                    ACHIEVEMENTS.get(i).getDescription() + ACHIEVEMENTS.get(i).getName(), 
+                    userAchievement.contains(ACHIEVEMENTS.get(i).getAchievement()));
             panel.add(achievementPanel);
         }
 

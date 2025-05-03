@@ -40,18 +40,18 @@ public class DatabaseManager {
 
     public boolean addUser(User user) {
         String insertQuery = "INSERT INTO users (login, password) VALUES (?, ?)";
-        
+
         try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)){
             insertStmt.setString(1, user.getLogin());
             insertStmt.setString(2, user.getPassword());
-            insertStmt.executeUpdate(); 
+            insertStmt.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    
+
     public boolean addUserSubjectProgress(int userId, int openedLevel) {
         String insertQuery = "INSERT INTO user_subject_progress (user_id, subject_id, opened_levels) VALUES (?, ?, ?)";
 
@@ -72,10 +72,10 @@ public class DatabaseManager {
             return false;
         }
     }
-    
+
     public boolean editUserOpenedLevels(int userId, int openedLevel, int subjectNumb) {
         String insertQuery = "UPDATE user_subject_progress SET opened_levels = ? WHERE user_id = ? AND subject_id = ?";
-        
+
         try (PreparedStatement updateStmt = connection.prepareStatement(insertQuery)){
             updateStmt.setInt(1, openedLevel);
             updateStmt.setInt(2, userId);
@@ -87,10 +87,10 @@ public class DatabaseManager {
             return false;
         }
     }
-    
+
     public int getOpenedLevels(int userId, int subjectNumb) {
         String query = "SELECT opened_levels FROM user_subject_progress WHERE user_id = ? AND subject_id = ?";
-        
+
         try (PreparedStatement stmt = connection.prepareStatement(query)){
             stmt.setInt(1, userId);
             stmt.setInt(2, subjectNumb);
@@ -104,10 +104,10 @@ public class DatabaseManager {
         }
         return 0;
     }
-        
+
     public User getUser(int userId) {
         String query = "SELECT * FROM users WHERE user_id = ?";
-        
+
         try (PreparedStatement stmt = connection.prepareStatement(query)){
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
@@ -121,8 +121,8 @@ public class DatabaseManager {
         }
         return null;
     }
-    
-    public int getUserId(User user){        
+
+    public int getUserId(User user){
         String query = "SELECT user_id FROM users WHERE login = ? AND password = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, user.getLogin());
@@ -140,7 +140,7 @@ public class DatabaseManager {
 
     public boolean authenticate(User user) {
         String query = "SELECT * FROM users WHERE login = ? AND password = ?";
-        
+
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, user.getLogin());
             stmt.setString(2, user.getPassword());
@@ -155,7 +155,7 @@ public class DatabaseManager {
         ArrayList<Task> allTasks = new ArrayList<>();
 
         String query = "SELECT task_id, description, correct_answer FROM task WHERE level_id = ? AND subject = ?";
-        
+
         try(PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, levelId);
             stmt.setInt(2, subject);
@@ -172,7 +172,7 @@ public class DatabaseManager {
         }
         return allTasks;
     }
-    
+
     public Task getTask(int taskId, int subject) {
         String query = "SELECT level_id, description, correct_answer FROM task WHERE task_id = ? AND subject = ?";
 
@@ -192,7 +192,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     public ArrayList<IncorrectAnswers> getAnswersForTask(Task task) {
         String correctAnswer = task.getCorrectAnswer();
 
@@ -236,7 +236,7 @@ public class DatabaseManager {
         Collections.shuffle(result);
         return result;
     }
-    
+
     public Subject getSubject(int subject) {
         String query = "SELECT name, image FROM subject WHERE subject_id = ?";
 
@@ -254,7 +254,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     public LevelDb getLevel(int level_id) {
         String query = "SELECT name, description FROM level WHERE level_id = ?";
 
@@ -272,7 +272,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     public Achievement getAchievement(int achievement_id) {
         String query = "SELECT name, image, description FROM achievements  WHERE achievement_id = ?";
 
@@ -291,7 +291,7 @@ public class DatabaseManager {
         }
         return null;
     }
-        
+
     public ArrayList<Achievement> getAchievements() {
         ArrayList<Achievement> achievements = new ArrayList<>();
         String query = "SELECT achievement_id, name, image, description FROM achievements";
@@ -311,43 +311,42 @@ public class DatabaseManager {
         }
         return achievements;
     }
-    
-    /*public boolean IsAchievementCompleted(int achievement_id, int user_id) {
-        String query = "SELECT complete FROM achievements WHERE achievement_id = ? AND user_id = ?";
 
-        try(PreparedStatement stmt = connection.prepareStatement(query)) {
-            ResultSet rs = stmt.executeQuery();
+    public ArrayList<Integer> getUserAchievement(int userId) {
+        ArrayList<Integer> userAchievement = new ArrayList<>();
+        String query = "SELECT achievement_id FROM user_achievement WHERE user_id = ?";
 
-            if (rs.next()) {
-                boolean complete = rs.getBoolean("complete");
-                return complete;
+        try(PreparedStatement getStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = getStatement.executeQuery();
+            while (resultSet.next()){
+                userAchievement.add(resultSet.getInt("achievement_id"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
-    }*/
-    
+        return userAchievement;
+    }
+
     public ArrayList<Joke> loadJokes(){
         String sqlQury = "SELECT description, image FROM joke";
         ArrayList<Joke> jokes = new ArrayList<>();
-        
+
         try(PreparedStatement stmt = connection.prepareStatement(sqlQury)) {
             ResultSet resultSet = stmt.executeQuery();
-            
+
             while (resultSet.next()) {
-                Joke joke = new Joke(resultSet.getString("description"), 
+                Joke joke = new Joke(resultSet.getString("description"),
                         resultSet.getString("image"));
                 jokes.add(joke);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         Collections.shuffle(jokes);
         return jokes;
-    }   
-    
+    }
+
     public void addUserAchivement(int userId, int achivementId){
         String sqlQuery = "INSERT INTO user_achievement VALUES (?, ?)";
         try (PreparedStatement insert = connection.prepareStatement(sqlQuery)) {
