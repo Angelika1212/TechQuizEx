@@ -15,7 +15,7 @@ public class AchievementsWindow extends JFrame {
     private JPanel achievementsPanel;   
     private DatabaseManager databasemanager;
     private int userId;
-    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В."};
+    private static final String[] TEACHERS = {"Матстат - Перегуда А.И.", "Линейная алгебра - Сёмина Л. Г.", "С/С++- Качанов Б. В.", "Общие достижения"};
     private static String[][] ACHIEVEMENTS = new String[TEACHERS.length][TEACHERS.length*6];
     
     private void setAchievementArr(){
@@ -25,6 +25,7 @@ public class AchievementsWindow extends JFrame {
                 ACHIEVEMENTS[j][i] = arr.get(i).getName();
             }
         }
+        for(int i = 0; i < 24; i++) ACHIEVEMENTS[3][i] = arr.get(i).getName();
     }
    
     public AchievementsWindow(DatabaseManager databasemanager, int userId) {
@@ -88,6 +89,10 @@ public class AchievementsWindow extends JFrame {
             }
             case 2 -> {
                 left = 12;
+                right = 18;
+            }
+            case 3 -> {
+                left = 0;
                 right = 18;
             }
         }
