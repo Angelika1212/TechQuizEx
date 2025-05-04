@@ -74,6 +74,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Уровни");
         setLocationByPlatform(true);
 
         jPanel1.setLayout(new java.awt.GridLayout(12, 1, 0, 5));

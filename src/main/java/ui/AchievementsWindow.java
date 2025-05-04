@@ -24,6 +24,7 @@ public class AchievementsWindow extends JFrame {
         this.userAchievement = databasemanager.getUserAchievement(userId);
         this.ACHIEVEMENTS = databasemanager.getAchievements();
         setTitle("Достижения");
+        setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

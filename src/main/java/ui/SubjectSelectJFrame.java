@@ -36,6 +36,7 @@ public class SubjectSelectJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Выберите предмет");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setLocationByPlatform(true);
         setMinimumSize(getPreferredSize());
         getContentPane().setLayout(new java.awt.BorderLayout(0, 10));

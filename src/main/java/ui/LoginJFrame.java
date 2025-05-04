@@ -18,6 +18,7 @@ public class LoginJFrame extends JFrame {
         setTitle("Авторизация");
         setSize(350, 250);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());

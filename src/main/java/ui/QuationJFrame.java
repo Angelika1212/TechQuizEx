@@ -209,6 +209,8 @@ public class QuationJFrame extends javax.swing.JFrame {
         backDevButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Задачи");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(700, 410));
 
