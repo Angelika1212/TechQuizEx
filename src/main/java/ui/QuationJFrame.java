@@ -118,28 +118,20 @@ public class QuationJFrame extends javax.swing.JFrame {
         varIlabel.setOpaque(true);
         varIlabel.setBackground(Color.lightGray);
         this.userAnswer = varIlabel.getText();
-        IsAnswerOfUserIsCorrect();
+        IsAnswerOfUserIsCorrect(varIlabel);
         return userAnswer;
     }
 
-    private void IsAnswerOfUserIsCorrect() {
+    private void IsAnswerOfUserIsCorrect(javax.swing.JLabel varIlabel) {
         ArrayList<javax.swing.JLabel> labels = new ArrayList<>();
         labels.add(this.var1Label);
         labels.add(this.var2Label);
         labels.add(this.var3Label);
         labels.add(this.var4Label);
-
-        for (javax.swing.JLabel panel : labels) {
-            if (panel.getText().equals(correctAnswer)) {
-                panel.setOpaque(true);
-                panel.setBackground(Color.green);
-            } else {
-                panel.setOpaque(true);
-                panel.setBackground(Color.red);
-            }
-        }
-
+        
         if (userAnswer.equals(correctAnswer)) {
+            varIlabel.setOpaque(true);
+            varIlabel.setBackground(Color.green);
             JOptionPane.showMessageDialog(this, "Молодец! Идём к следующей задаче!");
             quastionNumb++;
             for (javax.swing.JLabel panel : labels) {
@@ -148,6 +140,8 @@ public class QuationJFrame extends javax.swing.JFrame {
             }
             openNextLevel(quastionNumb);
         } else {
+            varIlabel.setOpaque(true);
+            varIlabel.setBackground(Color.red);
             JOptionPane.showMessageDialog(this, "Попробуй ещё раз!");
             for (javax.swing.JLabel panel : labels) {
                 panel.setOpaque(false);
