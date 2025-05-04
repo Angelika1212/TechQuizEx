@@ -123,16 +123,55 @@ public class QuationJFrame extends javax.swing.JFrame {
     }
     
     private void openNextLevel(int quastionNumb){
-        if(quastionNumb == 10){
-            if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) != 10) levelNumb = 10;
-            else levelNumb++;
-            dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
-            LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
-            subjectSelectJFrame.setVisible(true);
-            dispose();
+            if(quastionNumb == 10){
+                if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) != 10){
+                    levelNumb = 10;
+                    switch(subjectNumb){
+                        case 1 -> {
+                            dbManager.addUserAchivement(userId, 1);
+                        }
+                        case 2 -> {
+                            dbManager.addUserAchivement(userId, 2);
+                        }
+                        case 3 -> {
+                            dbManager.addUserAchivement(userId, 3);
+                        }
+                    }
+                }
+                else if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) == 10){
+                    switch(subjectNumb){
+                        case 1 -> {
+                            dbManager.addUserAchivement(userId, 1);
+                        }
+                        case 2 -> {
+                            dbManager.addUserAchivement(userId, 2);
+                        }
+                        case 3 -> {
+                            dbManager.addUserAchivement(userId, 3);
+                        }
+                    }
+                }
+                if(levelNumb >= 9 && dbManager.getOpenedLevels(userId, subjectNumb) >= 9){
+                    switch(subjectNumb){
+                        case 1 -> {
+                            dbManager.addUserAchivement(userId, 4);
+                        }
+                        case 2 -> {
+                            dbManager.addUserAchivement(userId, 5);
+                        }
+                        case 3 -> {
+                            dbManager.addUserAchivement(userId, 6);
+                        }
+                    }
+                }
+                else levelNumb++;
+                dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
+                LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
+                subjectSelectJFrame.setVisible(true);
+                dispose();
+            }
+            else setupQuastion();
         }
-        else setupQuastion();
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
