@@ -317,6 +317,8 @@ public class DatabaseManager {
         String query = "SELECT achievement_id FROM user_achievement WHERE user_id = ?";
 
         try(PreparedStatement getStatement = connection.prepareStatement(query)) {
+            getStatement.setInt(1, userId);
+            
             ResultSet resultSet = getStatement.executeQuery();
             while (resultSet.next()){
                 userAchievement.add(resultSet.getInt("achievement_id"));
