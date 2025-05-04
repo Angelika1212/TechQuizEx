@@ -69,6 +69,15 @@ public class QuationJFrame extends javax.swing.JFrame {
             this.userAchievmentCash.add(this.allAchievements.get(achievementName));
         }
     }
+    
+    //TO-DO: обновить openNextLevel для взаимодействия с данным методом.
+    private void checkSessionPassedCondition(){
+        if (this.userAchievmentCash.contains(this.allAchievements.get("Знаток матстата")) &&
+                this.userAchievmentCash.contains(this.allAchievements.get("Знаток линейной алгебры")) &&
+                this.userAchievmentCash.contains(this.allAchievements.get("Знаток С/C++"))) {
+            updateUserAchievements("Сессия сдана");
+        }
+    }
 
     private void setupQuastion() {
         try {
