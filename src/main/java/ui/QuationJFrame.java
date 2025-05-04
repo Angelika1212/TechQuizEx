@@ -70,11 +70,10 @@ public class QuationJFrame extends javax.swing.JFrame {
         }
     }
     
-    //TO-DO: обновить openNextLevel для взаимодействия с данным методом.
     private void checkSessionPassedCondition(){
         if (this.userAchievmentCash.contains(this.allAchievements.get("Знаток матстата")) &&
                 this.userAchievmentCash.contains(this.allAchievements.get("Знаток линейной алгебры")) &&
-                this.userAchievmentCash.contains(this.allAchievements.get("Знаток С/C++"))) {
+                this.userAchievmentCash.contains(this.allAchievements.get("Знаток C/C++"))) {
             updateUserAchievements("Сессия сдана");
         }
     }
@@ -179,6 +178,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         if (levelNumb < 10) levelNumb++;
         
         dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
+        checkSessionPassedCondition();
         LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
         subjectSelectJFrame.setVisible(true);
         dispose();
