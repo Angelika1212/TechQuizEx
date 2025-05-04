@@ -3,25 +3,26 @@ package ui;
 import db.DatabaseManager;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Achievement;
 import model.IncorrectAnswers;
 import model.Task;
 import ui_components.RoundJButton;
 import ui_components.RoundJTextArea;
 
 public class QuationJFrame extends javax.swing.JFrame {
-
     private String userAnswer;
     private int levelNumb;
     private int quastionNumb = 0;
     private String correctAnswer;
-    
-    private int taskNumb;
     private int subjectNumb;
     private final DatabaseManager dbManager;
+    private ArrayList<Achievement> userAchievmentCash = new ArrayList<>();
+    private HashMap<String, Achievement> allAchievements = new HashMap<>(); 
     private int userId;
         
     public QuationJFrame(int levelNumb, int subjectNumb, DatabaseManager dbManager, int userId) {
@@ -29,6 +30,8 @@ public class QuationJFrame extends javax.swing.JFrame {
         this.subjectNumb = subjectNumb;
         this.levelNumb = levelNumb;
         this.userId = userId;
+        loadAchivements();
+        loadAchivementCashe();
         initComponents();
         setupQuastion();
     }
@@ -39,8 +42,32 @@ public class QuationJFrame extends javax.swing.JFrame {
         this.levelNumb = levelNumb;
         this.quastionNumb = questionNumb;
         this.userId = userId;
+        loadAchivements();
+        loadAchivementCashe();
         initComponents();
         setupQuastion();
+    }
+    
+    private void loadAchivements(){
+        ArrayList<Achievement> achievementList = dbManager.getAchievements();
+        achievementList.forEach(elem -> {
+            this.allAchievements.put(elem.getName(), elem);
+        });
+    }
+    
+    private void loadAchivementCashe(){
+        ArrayList<Integer> userAchiev = this.dbManager.getUserAchievement(userId);
+        userAchiev.forEach(id -> {
+            Achievement achiev = this.dbManager.getAchievement(id);
+            this.userAchievmentCash.add(achiev);
+        });
+    }
+    
+    private void updateUserAchievements(String achievementName){
+        if (!this.userAchievmentCash.contains(this.allAchievements.get(achievementName))){
+            this.dbManager.addUserAchivement(userId, allAchievements.get(achievementName).getAchievement());
+            this.userAchievmentCash.add(this.allAchievements.get(achievementName));
+        }
     }
 
     private void setupQuastion() {
@@ -316,21 +343,25 @@ public class QuationJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void exitDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitDevButtonActionPerformed
+        updateUserAchievements("Шерлок Холмс");
         System.exit(0);
     }//GEN-LAST:event_exitDevButtonActionPerformed
 
     private void nextQuestionDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionDevButtonActionPerformed
+        updateUserAchievements("Шерлок Холмс");
         this.quastionNumb = (this.quastionNumb < 10) ? this.quastionNumb++: 10;
         setupQuastion();
     }//GEN-LAST:event_nextQuestionDevButtonActionPerformed
 
     private void examDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examDevButtonActionPerformed
+        updateUserAchievements("Шерлок Холмс");
         this.levelNumb = 10;
         this.quastionNumb = 0;
         setupQuastion();
     }//GEN-LAST:event_examDevButtonActionPerformed
 
     private void backDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backDevButtonActionPerformed
+        updateUserAchievements("Шерлок Холмс");
         this.quastionNumb = (this.quastionNumb > 0) ? this.quastionNumb--: 0;
         setupQuastion();
     }//GEN-LAST:event_backDevButtonActionPerformed
