@@ -197,6 +197,7 @@ public class LevelMapJFrame extends javax.swing.JFrame {
         getContentPane().add(filler4, java.awt.BorderLayout.LINE_END);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void level1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ButtonActionPerformed

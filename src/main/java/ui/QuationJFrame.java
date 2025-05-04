@@ -311,8 +311,11 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         exitDevButton.setBackground(new java.awt.Color(242, 242, 242));
-        exitDevButton.setText("       ");
+        exitDevButton.setText("   ");
         exitDevButton.setBorder(null);
+        exitDevButton.setBorderPainted(false);
+        exitDevButton.setDefaultCapable(false);
+        exitDevButton.setFocusPainted(false);
         exitDevButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitDevButtonActionPerformed(evt);
@@ -321,8 +324,11 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel4.add(exitDevButton, java.awt.BorderLayout.WEST);
 
         nextQuestionDevButton.setBackground(new java.awt.Color(242, 242, 242));
-        nextQuestionDevButton.setText("      ");
+        nextQuestionDevButton.setText("   ");
         nextQuestionDevButton.setBorder(null);
+        nextQuestionDevButton.setBorderPainted(false);
+        nextQuestionDevButton.setContentAreaFilled(false);
+        nextQuestionDevButton.setFocusPainted(false);
         nextQuestionDevButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextQuestionDevButtonActionPerformed(evt);
@@ -338,8 +344,11 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel6.setLayout(new java.awt.BorderLayout());
 
         examDevButton.setBackground(new java.awt.Color(242, 242, 242));
-        examDevButton.setText("      ");
+        examDevButton.setText("   ");
         examDevButton.setBorder(null);
+        examDevButton.setBorderPainted(false);
+        examDevButton.setDefaultCapable(false);
+        examDevButton.setFocusPainted(false);
         examDevButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examDevButtonActionPerformed(evt);
@@ -348,8 +357,12 @@ public class QuationJFrame extends javax.swing.JFrame {
         jPanel6.add(examDevButton, java.awt.BorderLayout.EAST);
 
         backDevButton.setBackground(new java.awt.Color(242, 242, 242));
-        backDevButton.setText("       ");
+        backDevButton.setText("   ");
         backDevButton.setBorder(null);
+        backDevButton.setBorderPainted(false);
+        backDevButton.setDefaultCapable(false);
+        backDevButton.setFocusPainted(false);
+        backDevButton.setFocusable(false);
         backDevButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backDevButtonActionPerformed(evt);
@@ -360,6 +373,7 @@ public class QuationJFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel6, java.awt.BorderLayout.PAGE_END);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -375,7 +389,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
     private void nextQuestionDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQuestionDevButtonActionPerformed
         updateUserAchievements("Шерлок Холмс");
-        this.quastionNumb = (this.quastionNumb < 10) ? this.quastionNumb++: 10;
+        this.quastionNumb = (this.quastionNumb < 9) ? (++this.quastionNumb): 9;
         setupQuastion();
     }//GEN-LAST:event_nextQuestionDevButtonActionPerformed
 
@@ -388,7 +402,7 @@ public class QuationJFrame extends javax.swing.JFrame {
 
     private void backDevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backDevButtonActionPerformed
         updateUserAchievements("Шерлок Холмс");
-        this.quastionNumb = (this.quastionNumb > 0) ? this.quastionNumb--: 0;
+        this.quastionNumb = (this.quastionNumb > 0) ? (--this.quastionNumb): 0;
         setupQuastion();
     }//GEN-LAST:event_backDevButtonActionPerformed
 
