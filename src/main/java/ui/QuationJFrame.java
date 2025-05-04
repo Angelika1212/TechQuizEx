@@ -149,56 +149,34 @@ public class QuationJFrame extends javax.swing.JFrame {
         }
     }
     
-    private void openNextLevel(int quastionNumb){
-            if(quastionNumb == 10){
-                if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) != 10){
-                    levelNumb = 10;
-                    switch(subjectNumb){
-                        case 1 -> {
-                            dbManager.addUserAchivement(userId, 1);
-                        }
-                        case 2 -> {
-                            dbManager.addUserAchivement(userId, 2);
-                        }
-                        case 3 -> {
-                            dbManager.addUserAchivement(userId, 3);
-                        }
-                    }
-                }
-                else if(levelNumb == 10 && dbManager.getOpenedLevels(userId, subjectNumb) == 10){
-                    switch(subjectNumb){
-                        case 1 -> {
-                            dbManager.addUserAchivement(userId, 1);
-                        }
-                        case 2 -> {
-                            dbManager.addUserAchivement(userId, 2);
-                        }
-                        case 3 -> {
-                            dbManager.addUserAchivement(userId, 3);
-                        }
-                    }
-                }
-                if(levelNumb >= 9 && dbManager.getOpenedLevels(userId, subjectNumb) >= 9){
-                    switch(subjectNumb){
-                        case 1 -> {
-                            dbManager.addUserAchivement(userId, 4);
-                        }
-                        case 2 -> {
-                            dbManager.addUserAchivement(userId, 5);
-                        }
-                        case 3 -> {
-                            dbManager.addUserAchivement(userId, 6);
-                        }
-                    }
-                }
-                else levelNumb++;
-                dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
-                LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
-                subjectSelectJFrame.setVisible(true);
-                dispose();
-            }
-            else setupQuastion();
+    private void openNextLevel(int questionNumb) {
+    if (questionNumb == 10) {
+        if (levelNumb >= 9) {
+            String subjectName = switch(subjectNumb) {
+                case 1 -> "матстата";
+                case 2 -> "линейной алгебры";
+                case 3 -> "C/C++";
+                default -> "";
+            };
+            String subjectNameR = switch(subjectNumb) {
+                case 1 -> "матстату";
+                case 2 -> "линейной алгебре";
+                case 3 -> "C/C++";
+                default -> "";
+            };
+            if (levelNumb == 10) updateUserAchievements("Знаток " + subjectName);
+            if (levelNumb >= 9) updateUserAchievements("Готов к экзамену по " + subjectNameR);
         }
+        if (levelNumb < 10) levelNumb++;
+        
+        dbManager.editUserOpenedLevels(userId, levelNumb, subjectNumb);
+        LevelMapJFrame subjectSelectJFrame = new LevelMapJFrame(subjectNumb, userId, dbManager, levelNumb);
+        subjectSelectJFrame.setVisible(true);
+        dispose();
+    } else {
+        setupQuastion();
+    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
