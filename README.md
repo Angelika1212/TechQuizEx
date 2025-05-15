@@ -64,6 +64,10 @@ ____
 1) Необходимо восстановить dump файл базы данных PostgreSQL:
    
    `psql -d ваша_база -U ваш_пользователь -f файл_дампа.sql`
+
+   или
+
+   'pg_restore -h localhost -U postgres -d mydb backup.sql'
    
 3) Указать соответсвующий URL, USER, PASSWORD в DatabaseManager.java расположенный src\main\java\db\DatabaseManager.java
 
