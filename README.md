@@ -1,7 +1,7 @@
 # QuizEx
 
 **«QuizEx»** - это десктопное приложение, разработанное в рамках дисциплины «Технологии программирования», которое предназначено для тестирования пользователей в формате викторины по следующим дисциплинам: 
-+ Математический анализ; 
++ Математическая статистика; 
 + Линейная алгебра;
 + Объектно-ориентированное программирование, включая основы Си/С++;
 ____
@@ -22,7 +22,7 @@ ____
 Графический интерфейс был реализован с помощью библиотеки Swing.
 В качестве базы данных использовался PostgreSQL версии 16.
 
-## Диаграмма компонентов:
+## Диаграмма пакетов:
 
 ![image](https://github.com/user-attachments/assets/3057ec17-481c-42c2-b8c2-5c08b5e7492a)
 
@@ -67,9 +67,9 @@ ____
 
    или
 
-   'pg_restore -h localhost -U postgres -d mydb backup.sql'
+   `pg_restore -h localhost -U postgres -d mydb backup.sql`
    
-3) Указать соответсвующий URL, USER, PASSWORD в DatabaseManager.java расположенный src\main\java\db\DatabaseManager.java
+2) Указать соответсвующий URL, USER, PASSWORD в DatabaseManager.java расположенный src\main\java\db\DatabaseManager.java
 
    `private static final String URL = "";`
 
